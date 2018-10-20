@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include "Player.h"
+
 int main(int argc, const char * argv[]) {
     int gameVersion = 0, nPlayers = 0;
     
@@ -24,5 +26,6 @@ int main(int argc, const char * argv[]) {
         std::cin >> tempPlayerName;
         playerNames[i] = tempPlayerName;
     }
+    
     return 0;
 }
