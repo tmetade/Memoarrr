@@ -1,8 +1,11 @@
 #include "Player.h"
 
-Player::Player(std::string playerName)
+Player::Player(std::string name, Position &pos)
 {
-    name = playerName;
+    playerName = name;
+    playerPos = pos;
+    active = true;
+    outputString += playerName + " : " + " (active)";
 }
 
 Player::~Player()
@@ -17,11 +20,14 @@ void Player::addReward(const Reward& reward)
 
 void Player::setDisplayMode(bool endOfGame)
 {
-    
+    if(endOfGame)
+    {
+        
+    }
 }
 
-//Dont know why but this prints memory address
-std::ostream& operator<<(std::ostream& os, const Player p) {
-    os << "I'm in the class, msg=" << std::endl;
+std::ostream& operator<<(std::ostream& os, const Player &p)
+{
+    os << p.outputString << std::endl;
     return os;
 }

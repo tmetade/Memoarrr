@@ -2,7 +2,7 @@
 
 //Design a class Rules which has the main purpose to check if a selection of a player is valid. 
 
-Rules::Rules()
+Rules::Rules(int ruleType)
 {
     
 }

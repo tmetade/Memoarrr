@@ -1,6 +1,7 @@
 #include <iostream>
 
 #include "Player.h"
+#include "Rules.h"
 
 int main(int argc, const char * argv[]) {
     int gameVersion = 0, nPlayers = 0;
@@ -25,6 +26,15 @@ int main(int argc, const char * argv[]) {
     {
         std::cin >> tempPlayerName;
         playerNames[i] = tempPlayerName;
+    }
+    
+    //Create the game objects
+    const Game *game = new Game();
+    Rules gameRules(1);
+    
+    while(gameRules.gameOver(*game))
+    {
+        
     }
     
     return 0;

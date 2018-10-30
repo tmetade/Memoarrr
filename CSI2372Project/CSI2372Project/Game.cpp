@@ -4,8 +4,8 @@
 
 Game::Game()
 : round(0)
-, currentPlayer(NULL)
 , currentCard()
+//, currentPlayer()
 {
     
 }

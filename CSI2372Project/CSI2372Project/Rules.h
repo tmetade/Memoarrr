@@ -8,7 +8,7 @@
 class Rules
 {
 public:
-    Rules();
+    Rules(int ruleType);
     ~Rules();
     
     bool isValid(const Game&);

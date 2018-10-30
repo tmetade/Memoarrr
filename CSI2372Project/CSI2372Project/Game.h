@@ -13,13 +13,13 @@ public:
     
     int getRound(){ return round; };
     void addPlayer( const Player& );
-    Player& getPlayer() { return currentPlayer; };
+    //Player& getPlayer() { return currentPlayer; };
     const Card* getPreviousCard();
     const Card* getCurrentCard();
     void setCurrentCard( const Card* card);
 private:
     int round;
-    Player currentPlayer;
+   // Player currentPlayer;
     const Card *currentCard;
 };
 
