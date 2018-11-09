@@ -10,11 +10,7 @@ public:
         return new Card(animal, background);
     }
     
-    static CardDeck &make_CardDeck(){
-        
-    }
-private:
-    
+    static CardDeck &make_CardDeck();
 };
 
 
