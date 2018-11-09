@@ -17,6 +17,7 @@
 		0CCE9A8C217781EA00AD9320 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE9A8A217781EA00AD9320 /* Player.cpp */; };
 		0CCE9A8F217781FA00AD9320 /* Card.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE9A8D217781FA00AD9320 /* Card.cpp */; };
 		0CCE9A922177820700AD9320 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE9A902177820700AD9320 /* Board.cpp */; };
+		1CD9DF9D219640EB002EF0E4 /* DeckCard.h in Sources */ = {isa = PBXBuildFile; fileRef = 1CD9DF9C219640EB002EF0E4 /* DeckCard.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -52,6 +53,7 @@
 		0CCE9A8E217781FA00AD9320 /* Card.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
 		0CCE9A902177820700AD9320 /* Board.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Board.cpp; sourceTree = "<group>"; };
 		0CCE9A912177820700AD9320 /* Board.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Board.h; sourceTree = "<group>"; };
+		1CD9DF9C219640EB002EF0E4 /* DeckCard.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DeckCard.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				0C20D63F217AB5AD00C2CB6B /* Game.h */,
 				0C20D641217AB5E800C2CB6B /* Rules.cpp */,
 				0C20D642217AB5E800C2CB6B /* Rules.h */,
+				1CD9DF9C219640EB002EF0E4 /* DeckCard.h */,
 			);
 			path = CSI2372Project;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 				0C20D633217A96F700C2CB6B /* Reward.cpp in Sources */,
 				0CCE9A922177820700AD9320 /* Board.cpp in Sources */,
 				0C20D643217AB5E800C2CB6B /* Rules.cpp in Sources */,
+				1CD9DF9D219640EB002EF0E4 /* DeckCard.h in Sources */,
 				0C20D636217AB48300C2CB6B /* Deck.cpp in Sources */,
 				0CCE9A8421777B3D00AD9320 /* main.cpp in Sources */,
 			);

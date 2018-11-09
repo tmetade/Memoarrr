@@ -1,7 +1,10 @@
 #include "Board.h"
+#include "Card.h"
+#include <vector>
 
 Board::Board()
 {
+    
     
 }
 

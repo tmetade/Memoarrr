@@ -13,9 +13,13 @@ Player::~Player()
     
 }
 
+void addReward(const Reward& reward);
+void setDisplayMode(bool endOfGame);
+
+
 void Player::addReward(const Reward& reward)
 {
-    
+    nRubies += reward.getReward();
 }
 
 void Player::setDisplayMode(bool endOfGame)
