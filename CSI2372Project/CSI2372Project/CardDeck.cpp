@@ -1,14 +1,12 @@
 #include "CardDeck.h"
+#include "Deck.h"
+#include <algorithm>
+using namespace std;
 
-CardDeck::CardDeck()
-{
-    
-}
+vector<Card> CardDeck::cards;
 
-CardDeck::~CardDeck()
-{
-    
-}
+
+void CardDeck::Deck<Card>::shuffle()
 
 //static CardDeck& make_CardDeck()
 //{

@@ -7,11 +7,13 @@ template <class C>
 class Deck
 {
 public:
-    bool isEmpty() const;
-    C* getNext();
-    
+    virtual bool isEmpty() { return numCards == 0; };
+    virtual C* getNext() = 0;
+    virtual void shuffle() = 0;
+
 protected:
-        void shuffle();
+    int numCards;
+    Deck(int numCards) : numCards{ numCards } {}
 };
 
 #endif
