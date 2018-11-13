@@ -9,12 +9,6 @@ void Deck<C>::shuffle()
 }
 
 template <class C>
-bool Deck<C>::isEmpty() const
-{
-    //shuffles the cards in the deck. You must use the function std::random_shuffle from the standard template library
-}
-
-template <class C>
 C* Deck<C>::getNext()
 {
     // returns the next card or reward by pointer. Will return nullptr if no more cards or rewards are available

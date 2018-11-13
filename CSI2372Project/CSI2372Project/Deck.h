@@ -7,7 +7,7 @@ template <class C>
 class Deck
 {
 public:
-    virtual bool isEmpty() { return numCards == 0; };
+    virtual bool const isEmpty() { return numCards == 0; }
     virtual C* getNext() = 0;
     virtual void shuffle() = 0;
 

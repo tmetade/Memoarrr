@@ -43,8 +43,11 @@ Card::Card(FaceAnimal animal, FaceBackground colour){
     
 }
 
-std::string Card::operator()(int row) {
-    return face[row];
+Card::FaceAnimal Card::getFaceAnimalAtIndex(int index){
+    return static_cast<FaceAnimal>(index);
+}
+Card::FaceBackground Card::getFaceBackgroundAtIndex(int index){
+    return static_cast<FaceBackground>(index);
 }
 
 Card::~Card()

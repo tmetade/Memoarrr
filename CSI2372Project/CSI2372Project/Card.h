@@ -11,11 +11,15 @@ public:
     enum FaceAnimal {Crab, Penguin, Octopus, Turtle, Walrus};
     enum FaceBackground {Red, Green, Purple, Blue, Yellow};
     std::string face[3];
+    
+    static FaceBackground getFaceBackgroundAtIndex(int index);
+    static FaceAnimal getFaceAnimalAtIndex(int index);
+    
     friend class CardDeck;
-private:
-    Card operator()(int row);
-    Card(FaceAnimal, FaceBackground);
     ~Card();
+private:
+    std::string operator()(int row) { return face[row]; }
+    Card(FaceAnimal, FaceBackground);
 };
 
 #endif

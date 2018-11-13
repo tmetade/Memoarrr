@@ -34,9 +34,6 @@ int main(int argc, const char * argv[]) {
     const Game *game = new Game();
     Rules gameRules(gameVersion);
     
-    Deck<Card> cardDeck;
-    
-    Deck<Reward> rewardDeck;
     
     while(gameRules.gameOver(*game))
     {
