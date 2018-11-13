@@ -8,19 +8,21 @@
 class CardDeck : public Deck<Card>
 {
 public:
-    static const int NUM_OF_BACKGROUNDS = 5;
-    static const int NUM_OF_ANIMALS = 5;
-    
     static CardDeck& make_CardDeck();
-    CardDeck() : Deck(NUM_OF_ANIMALS*NUM_OF_BACKGROUNDS){}
-    static std::vector<Card> cards;
+    Card* getNext();
     
     CardDeck(const CardDeck&) = delete;
     void operator=(const CardDeck& x) = delete;
     
 protected:
     void shuffle();
-    Card* getNext();
+    
+private:
+    static const int NUM_OF_BACKGROUNDS = 5;
+    static const int NUM_OF_ANIMALS = 5;
+    
+    CardDeck() : Deck(NUM_OF_ANIMALS*NUM_OF_BACKGROUNDS){}
+    static std::vector<Card> cards;
 };
 
 #endif
