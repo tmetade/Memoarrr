@@ -3,14 +3,15 @@
 
 #include <stdio.h>
 
+template <class C>
 class Deck
 {
-    Deck();
-    ~Deck();
+public:
+    bool isEmpty() const;
+    C* getNext();
     
-    virtual void shuffle() = 0;
-    //C* getNext()
-    virtual bool isEmpty() const = 0;
+protected:
+        void shuffle();
 };
 
 #endif

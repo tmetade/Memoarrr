@@ -6,6 +6,7 @@
 
 class Reward
 {
+    friend class RewardDeck;
 public:
     friend std::ostream& operator<<(std::ostream& os, const Reward&);
     

@@ -6,6 +6,7 @@
 
 class Card
 {
+    friend class CardDeck;
 public:
     enum FaceAnimal {Crab, Penguin, Octopus, Turtle, Walrus};
     enum FaceBackground {Red, Green, Purple, Blue, Yellow};

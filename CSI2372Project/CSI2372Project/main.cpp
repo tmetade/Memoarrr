@@ -2,6 +2,8 @@
 
 #include "Player.h"
 #include "Rules.h"
+#include "Deck.h"
+#include "CardDeck.h"
 
 int main(int argc, const char * argv[]) {
     int gameVersion = 0, nPlayers = 0;
@@ -30,7 +32,11 @@ int main(int argc, const char * argv[]) {
     
     //Create the game objects
     const Game *game = new Game();
-    Rules gameRules(1);
+    Rules gameRules(gameVersion);
+    
+    Deck<Card> cardDeck;
+    
+    Deck<Reward> rewardDeck;
     
     while(gameRules.gameOver(*game))
     {
