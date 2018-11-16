@@ -3,6 +3,8 @@
 
 #include <stdio.h>
 
+#include "Card.h"
+
 class Board
 {
 public:
@@ -12,11 +14,12 @@ public:
     enum Letter {A,B};
     enum Number {Apple,Banana};
     
-    bool isFaceUp( const Letter&, const Number&) const;
-    bool turnFaceUp( const Board::Letter&, const Board::Number& );
-    bool turnFaceDown( const Board::Letter&, const Board::Number& );
+    const bool isFaceUp( const Letter&, const Number&);
+    bool turnFaceUp( const Letter&, const Number& );
+    bool turnFaceDown( const Letter&, const Number& );
     void reset();
-    
+    Card* getCard( const Letter&, const Number& );
+    void setCard( const Letter&, const Number&, Card* );
 };
 
 #endif

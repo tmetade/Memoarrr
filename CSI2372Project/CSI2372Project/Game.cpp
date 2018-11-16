@@ -35,4 +35,15 @@ void Game::setCurrentCard(const Card* card)
     currentCard = card;
 }
 
+Card* Game::getCard(const Board::Letter& letter, const Board::Number& number)
+{
+    //which calls the corresponding method in Board
+    return nullptr;
+}
+
+void Game::setCard(const Board::Letter& letter, const Board::Number& number, Card* card)
+{
+    //which calls the corresponding method in Board
+}
+
 //A game must be printable with the insertion operator cout << game. It should display the board and all players. 

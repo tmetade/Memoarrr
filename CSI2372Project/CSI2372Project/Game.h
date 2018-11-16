@@ -2,8 +2,10 @@
 #define Game_h
 
 #include <stdio.h>
-#include "Player.h"
+
+#include "Board.h"
 #include "Card.h"
+#include "Player.h"
 
 class Game
 {
@@ -13,13 +15,15 @@ public:
     
     int getRound(){ return round; };
     void addPlayer( const Player& );
-    //Player& getPlayer() { return currentPlayer; };
+    Player& getPlayer(Player::Side);
     const Card* getPreviousCard();
     const Card* getCurrentCard();
     void setCurrentCard( const Card* card);
+    Card* getCard( const Board::Letter&, const Board::Number&);
+    void setCard( const Board::Letter&, const Board::Number&, Card*);
+    
 private:
     int round;
-   // Player currentPlayer;
     const Card *currentCard;
 };
 
