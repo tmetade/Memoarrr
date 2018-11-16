@@ -1,9 +1,11 @@
 #include <iostream>
 
-#include "Player.h"
-#include "Rules.h"
-#include "Deck.h"
+#include "Board.h"
 #include "CardDeck.h"
+#include "Deck.h"
+#include "Player.h"
+#include "RewardDeck.h"
+#include "Rules.h"
 
 int main(int argc, const char * argv[]) {
     int gameVersion = 0, nPlayers = 0;
@@ -31,13 +33,22 @@ int main(int argc, const char * argv[]) {
     }
     
     //Create the game objects
-    const Game *game = new Game();
+    Game *game = new Game();
+    for (int i = 0; i<nPlayers; i++)
+    {
+        Player temp(playerNames[i]);
+        game->addPlayer(temp);
+    }
     Rules gameRules(gameVersion);
+    CardDeck &cardDeck = CardDeck::make_CardDeck();
+    RewardDeck &rewardDeck = RewardDeck::make_RewardDeck();
+    Board *gameBoard = new Board();
     
     
     while(gameRules.gameOver(*game))
     {
-        
+        cardDeck.shuffle();
+        rewardDeck.shuffle();
     }
     
     return 0;

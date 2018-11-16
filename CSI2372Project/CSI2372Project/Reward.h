@@ -10,11 +10,10 @@ class Reward
 public:
     friend std::ostream& operator<<(std::ostream& os, const Reward&);
     
-private:  
-    Reward(int rubyValue);
     ~Reward();
-    
+private:
     int rewardValue;
+    Reward(int rubyValue);
 };
 
 #endif

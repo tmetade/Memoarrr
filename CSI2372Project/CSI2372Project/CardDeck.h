@@ -13,9 +13,7 @@ public:
     
     CardDeck(const CardDeck&) = delete;
     void operator=(const CardDeck& x) = delete;
-    
-protected:
-    void shuffle();
+    void shuffle(); // says should be public in pdf but prof said protected in discussion
     
 private:
     static const int NUM_OF_BACKGROUNDS = 5;

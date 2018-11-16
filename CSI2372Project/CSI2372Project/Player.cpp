@@ -1,9 +1,8 @@
 #include "Player.h"
 
-Player::Player(std::string name, Position &pos)
+Player::Player(std::string name)
 {
     playerName = name;
-    playerPos = pos;
     active = true;
     outputString += playerName + " : " + " (active)";
 }

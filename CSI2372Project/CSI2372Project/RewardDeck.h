@@ -18,8 +18,7 @@ public:
     RewardDeck(const RewardDeck&) = delete;
     void operator=(const RewardDeck& x) = delete;
     
-protected:
-    void shuffle();
+    void shuffle(); // says should be public in pdf but prof said protected in discussion
     
 private:
     RewardDeck() : Deck(7){}

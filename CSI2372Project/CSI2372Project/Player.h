@@ -17,7 +17,7 @@ private:
     std::string outputString;
     
 public:
-    Player(std::string playerName, Position &pos);
+    Player(std::string playerName);
     ~Player();
     
     std::string getName() const { return playerName; };
