@@ -1,7 +1,21 @@
 #include "Board.h"
 
-Board::Board()
+Board::Board(Rules gameRules)
 {
+    for(int i = 0; i < 26; i++)
+    {
+        for (int j = 0; j < 20; j++)
+        {
+            if (j==0 || j==4 || j==8 || j==12 || j==16 || i==3 || i==4 || i==8 || i==9 || i==13 || i==14 || i==18 || i==19 || i==23 || i==24 || (i==10 &&j==9) || (i==10 &&j==10) ||(i==10 &&j==11) || (i==11 &&j==9) || (i==11 &&j==10) ||(i==11 &&j==11) || (i==12 &&j==9) || (i==12 &&j==10) ||(i==12 &&j==11))
+            {
+                boardDisplay[i][j] = " ";
+            }
+            else
+            {
+                boardDisplay[i][j] = "z";
+            }
+        }
+    }
     //the constructor for the board should throw an exception of type NoMoreCards if there are no more cards available to construct the board
 }
 
@@ -51,4 +65,15 @@ void Board::setCard(const Letter& letter, const Number& number, Card* card)
     
 }
 
-//A board must be printable with the insertion operator cout << board.
+std::ostream& operator<<(std::ostream& os, const Board& board)
+{
+    for(int i = 0; i < 27; i++)
+    {
+        for (int j = 0; j < 20; j++)
+        {
+           os<< board.boardDisplay[i][j] ;
+        }
+        os<<std::endl;
+    }
+    return os;
+}

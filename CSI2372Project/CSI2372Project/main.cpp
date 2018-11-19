@@ -7,25 +7,27 @@
 #include "RewardDeck.h"
 #include "Rules.h"
 
+using namespace std;
+
 int main(int argc, const char * argv[]) {
     int gameVersion = 0, nPlayers = 0;
     
     while(gameVersion<1 || gameVersion > 3)
     {
-        std::cout << "Select your game version: " <<std::endl;
-        std::cout << "1-Base Game 2-Expert Display Mode 3-Expert Rules Mode ";
-        std::cin >> gameVersion;
+        cout << "Select your game version: " << std::endl;
+        cout << "1-Base Game 2-Expert Display Mode 3-Expert Rules Mode ";
+        cin >> gameVersion;
     }
     
     while(nPlayers<2 || nPlayers>4)
     {
-        std::cout << "Enter the number of players (2-4): ";
-        std::cin >> nPlayers;
+        cout << "Enter the number of players (2-4): ";
+        cin >> nPlayers;
     }
     
-    std::string playerNames[nPlayers];
-    std::string tempPlayerName;
-    std::cout << "Enter the name of the players: ";
+    string playerNames[nPlayers];
+    string tempPlayerName;
+    cout << "Enter the name of the players: ";
     for(int i=0; i<nPlayers; i++)
     {
         std::cin >> tempPlayerName;
@@ -33,16 +35,19 @@ int main(int argc, const char * argv[]) {
     }
     
     //Create the game objects
-    Game *game = new Game();
+    Rules gameRules(gameVersion);
+    Board *gameBoard = new Board();
+    Game *game = new Game(gameBoard);
     for (int i = 0; i<nPlayers; i++)
     {
-        Player temp(playerNames[i]);
-        game->addPlayer(temp);
+        Player newPlayer(playerNames[i]);
+        game->addPlayer(newPlayer);
+        cout << newPlayer;
     }
-    Rules gameRules(gameVersion);
     CardDeck &cardDeck = CardDeck::make_CardDeck();
     RewardDeck &rewardDeck = RewardDeck::make_RewardDeck();
-    Board *gameBoard = new Board();
+    
+    cout<<*gameBoard;
     
     
     while(gameRules.gameOver(*game))

@@ -4,7 +4,6 @@ Player::Player(std::string name)
 {
     playerName = name;
     active = true;
-    outputString += playerName + " : " + " (active)";
 }
 
 Player::~Player()
@@ -25,8 +24,21 @@ void Player::setDisplayMode(bool endOfGame)
     }
 }
 
+std::string Player::getSideString() const
+{
+    return sideString[playerSide];
+}
+
 std::ostream& operator<<(std::ostream& os, const Player &p)
 {
-    os << p.outputString << std::endl;
+    os << std::boolalpha;
+    std::string activeText;
+    if(p.isActive())
+        activeText = "true";
+    else
+        activeText = "false";
+    
+    
+    os << p.getName() + " : " + p.getSideString() + " (" + activeText + ")" << std::endl;
     return os;
 }

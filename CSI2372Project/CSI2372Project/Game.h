@@ -10,7 +10,7 @@
 class Game
 {
 public:
-    Game();
+    Game(Board *board);
     ~Game();
     
     int getRound(){ return round; };

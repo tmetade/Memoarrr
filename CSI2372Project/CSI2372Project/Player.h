@@ -14,15 +14,17 @@ public:
     ~Player();
     
     enum Side {top, bottom, left, right};
+    std::string sideString[4] = {"top", "bottom", "left", "right"};
     
     std::string getName() const { return playerName; };
     void setActive(bool playerActive){ active = playerActive; };
-    bool isActive() { return active; };
+    bool isActive() const { return active; };
     int getNRubies() const { return nRubies; };
     void addReward(const Reward& reward);
     void setDisplayMode(bool endOfGame);
-    Side getSide(){ return playerSide; };
+    Side getSide() const { return playerSide; };
     void setSide(Side side){ playerSide = side; };
+    std::string getSideString() const;
     
     friend std::ostream& operator<<(std::ostream& os, const Player&);
     

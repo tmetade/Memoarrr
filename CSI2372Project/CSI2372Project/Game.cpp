@@ -2,7 +2,7 @@
 
 //Design a class Game that encapsulates the current state of the game and it will have a class variable of type Board. It is responsible to print the current state of the game. 
 
-Game::Game()
+Game::Game(Board *board)
 : round(0)
 , currentCard()
 //, currentPlayer()

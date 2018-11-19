@@ -13,6 +13,7 @@ public:
     
     enum Letter {A,B};
     enum Number {Apple,Banana};
+    std::string boardDisplay [26][20];
     
     const bool isFaceUp( const Letter&, const Number&);
     bool turnFaceUp( const Letter&, const Number& );
@@ -20,6 +21,8 @@ public:
     void reset();
     Card* getCard( const Letter&, const Number& );
     void setCard( const Letter&, const Number&, Card* );
+    
+    friend std::ostream& operator<<(std::ostream& os, const Board&);
 };
 
 #endif
