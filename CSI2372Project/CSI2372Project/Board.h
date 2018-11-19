@@ -8,12 +8,12 @@
 class Board
 {
 public:
-    Board();
+    Board( int gameVersion);
     ~Board();
     
     enum Letter {A,B};
     enum Number {Apple,Banana};
-    std::string boardDisplay [26][20];
+    std::string boardDisplay [26][21];
     
     const bool isFaceUp( const Letter&, const Number&);
     bool turnFaceUp( const Letter&, const Number& );

@@ -36,7 +36,7 @@ int main(int argc, const char * argv[]) {
     
     //Create the game objects
     Rules gameRules(gameVersion);
-    Board *gameBoard = new Board();
+    Board *gameBoard = new Board(gameVersion);
     Game *game = new Game(gameBoard);
     for (int i = 0; i<nPlayers; i++)
     {
