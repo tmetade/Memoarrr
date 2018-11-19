@@ -1,6 +1,6 @@
 #include "Board.h"
 
-Board::Board(Rules gameRules)
+Board::Board()
 {
     for(int i = 0; i < 26; i++)
     {
