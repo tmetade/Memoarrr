@@ -24,6 +24,7 @@ public:
     void setCard( const Board::Letter&, const Board::Number&, Card*);
     Board& getBoard() const { return *gameBoard; };
     std::vector<Player> getPlayers() const { return gamePlayers; };
+    void reset(); // resets board and sets all players to active
     
     friend std::ostream& operator<<(std::ostream& os, const Game&);
     

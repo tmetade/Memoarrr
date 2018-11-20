@@ -2,8 +2,6 @@
 
 Board::Board(int gameVersion)
 {
-    bool displayCoordinates = true;
-    
     if (gameVersion == 1)
         displayBoard();
     //the constructor for the board should throw an exception of type NoMoreCards if there are no more cards available to construct the board

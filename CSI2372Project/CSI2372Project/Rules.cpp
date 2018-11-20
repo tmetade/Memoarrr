@@ -27,12 +27,12 @@ bool Rules::gameOver(const Game& game)
 bool Rules::roundOver(const Game& game)
 {
     //  returns true if there is only one active Player left.
-    return true;
+    return false;
 }
 
 //const Player& Rules::getNextPlayer(const Game& game)
 //{
-//    
-//    return nullptr;
+//    const Player temp("jim");
+//    return &temp;
 //}
 

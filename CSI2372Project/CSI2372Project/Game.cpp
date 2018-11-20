@@ -46,6 +46,14 @@ void Game::setCard(const Board::Letter& letter, const Board::Number& number, Car
     //which calls the corresponding method in Board
 }
 
+void Game::reset()
+{
+    gameBoard->reset();
+    for (std::vector<Player>::iterator it = gamePlayers.begin(); it != gamePlayers.end(); ++it)
+        it->setActive(true);
+    
+}
+
 std::ostream& operator<<(std::ostream& os, const Game &game)
 {
     std::vector<Player> tempVec = game.getPlayers();

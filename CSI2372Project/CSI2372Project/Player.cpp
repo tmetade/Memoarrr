@@ -18,10 +18,6 @@ void Player::addReward(const Reward& reward)
 
 void Player::setDisplayMode(bool endOfGame)
 {
-    if(endOfGame)
-    {
-        
-    }
 }
 
 std::string Player::getSideString() const
@@ -34,9 +30,9 @@ std::ostream& operator<<(std::ostream& os, const Player &p)
     os << std::boolalpha;
     std::string activeText;
     if(p.isActive())
-        activeText = "true";
+        activeText = "active";
     else
-        activeText = "false";
+        activeText = "inactive";
     
     
     os << p.getName() + " : " + p.getSideString() + " (" + activeText + ")" << std::endl;

@@ -41,6 +41,7 @@ int main(int argc, const char * argv[]) {
     for (int i = 0; i<nPlayers; i++)
     {
         Player newPlayer(playerNames[i]);
+        newPlayer.setSide((Player::Side)i);
         game->addPlayer(newPlayer);
     }
     CardDeck &cardDeck = CardDeck::make_CardDeck();
@@ -48,12 +49,32 @@ int main(int argc, const char * argv[]) {
     
     cout<< *game;
     
-    
     while(gameRules.gameOver(*game))
     {
-        gameBoard->reset();
+        game->reset();
         
+        //for each palyer reveal 3 cards
+        
+        while(!gameRules.roundOver(*game))
+        {
+            std::string cardCoord;
+            //Player nextPlayer = gameRules.getNextPlayer(*game);
+            cout << "Enter in a card coordinate you would like to reveal: (eg. A2)";
+            cin >> cardCoord;
+            
+            //update Board
+            if(!gameRules.isValid(*game))
+            {
+                //nextPlayer.setActive(false);
+            }
+            
+            cout << *game;
+        }
+        //remaing active player gets reward
     }
+    
+    // print players with their number of rubies sorted form least to most rubies
+    // print overall winner
     
     return 0;
 }
