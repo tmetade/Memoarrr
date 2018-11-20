@@ -20,6 +20,11 @@ void Game::addPlayer( const Player& player)
     gamePlayers.push_back(player);
 }
 
+Player& Game::getPlayer(Player::Side side)
+{
+    return gamePlayers.at(side-1);
+}
+
 void Game::setCurrentCard(const Card* card)
 {
     currentCard = card;

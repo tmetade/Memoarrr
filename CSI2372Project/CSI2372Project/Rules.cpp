@@ -32,7 +32,6 @@ bool Rules::roundOver(const Game& game)
 
 //const Player& Rules::getNextPlayer(const Game& game)
 //{
-//    const Player temp("jim");
-//    return &temp;
+//    return game.getPlayer((Player::Side)1);
 //}
 
