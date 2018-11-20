@@ -8,8 +8,9 @@
 
 class Card
 {
-    friend class CardDeck;
 public:
+    ~Card();
+    
     enum FaceAnimal {Crab, Penguin, Octopus, Turtle, Walrus};
     enum FaceBackground {Red, Green, Purple, Blue, Yellow};
     std::string face[3];
@@ -18,7 +19,7 @@ public:
     static FaceAnimal getFaceAnimalAtIndex(int index);
     
     friend class CardDeck;
-    ~Card();
+    
 private:
     std::string operator()(int row) { return face[row]; }
     Card(FaceAnimal, FaceBackground);

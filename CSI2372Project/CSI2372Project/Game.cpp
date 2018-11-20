@@ -7,7 +7,7 @@ Game::Game(Board *board)
 , currentCard()
 , gameBoard(board)
 {
-    
+
 }
 
 Game::~Game()
@@ -18,16 +18,6 @@ Game::~Game()
 void Game::addPlayer( const Player& player)
 {
     gamePlayers.push_back(player);
-}
-
-const Card* Game::getPreviousCard()
-{
-    return NULL;
-}
-
-const Card* Game::getCurrentCard()
-{
-    return NULL;
 }
 
 void Game::setCurrentCard(const Card* card)
@@ -51,7 +41,6 @@ void Game::reset()
     gameBoard->reset();
     for (std::vector<Player>::iterator it = gamePlayers.begin(); it != gamePlayers.end(); ++it)
         it->setActive(true);
-    
 }
 
 std::ostream& operator<<(std::ostream& os, const Game &game)

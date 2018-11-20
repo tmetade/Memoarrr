@@ -44,16 +44,12 @@ int main(int argc, const char * argv[]) {
         newPlayer.setSide((Player::Side)i);
         game->addPlayer(newPlayer);
     }
-    CardDeck &cardDeck = CardDeck::make_CardDeck();
-    RewardDeck &rewardDeck = RewardDeck::make_RewardDeck();
     
     cout<< *game;
     
     while(gameRules.gameOver(*game))
     {
-        game->reset();
-        
-        //for each palyer reveal 3 cards
+        //for each player reveal 3 cards
         
         while(!gameRules.roundOver(*game))
         {

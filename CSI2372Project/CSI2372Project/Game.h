@@ -17,20 +17,23 @@ public:
     int getRound(){ return round; };
     void addPlayer( const Player& );
     Player& getPlayer(Player::Side);
-    const Card* getPreviousCard();
-    const Card* getCurrentCard();
+    const Card* getPreviousCard() { return previousCard; };
+    const Card* getCurrentCard() { return currentCard; };
     void setCurrentCard( const Card* card);
     Card* getCard( const Board::Letter&, const Board::Number&);
     void setCard( const Board::Letter&, const Board::Number&, Card*);
+    
+    friend std::ostream& operator<<(std::ostream& os, const Game&);
+    
+protected:
     Board& getBoard() const { return *gameBoard; };
     std::vector<Player> getPlayers() const { return gamePlayers; };
     void reset(); // resets board and sets all players to active
     
-    friend std::ostream& operator<<(std::ostream& os, const Game&);
-    
 private:
     int round;
     const Card *currentCard;
+    const Card *previousCard;
     Board *gameBoard;
     std::vector<Player> gamePlayers;
 };

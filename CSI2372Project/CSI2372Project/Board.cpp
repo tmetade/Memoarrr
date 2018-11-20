@@ -1,10 +1,28 @@
 #include "Board.h"
 
+struct NoMoreCards : public std::exception
+{
+    const char * display () const throw ()
+    {
+        return "No More Cards";
+    }
+};
+
 Board::Board(int gameVersion)
 {
     if (gameVersion == 1)
         displayBoard();
-    //the constructor for the board should throw an exception of type NoMoreCards if there are no more cards available to construct the board
+    
+    for(int i = 0; i < 5; i++)
+    {
+        for(int j = 0; j < 5; j++)
+        {
+            if(!cardDeck.isEmpty())
+                cardBoard[i][j] = cardDeck.getNext();
+            else
+                throw NoMoreCards();
+        }
+    }
 }
 
 Board::~Board()
