@@ -17,8 +17,10 @@ Board::Board(int gameVersion)
             if(!cardDeck.isEmpty()){
                 if(i == 2 && j == 2){
                     cardBoard[i][j] = nullptr;
+                    cardFaceDown[i][j] = NULL;
                 } else {
                     cardBoard[i][j] = cardDeck.getNext();
+                    cardFaceDown[i][j] = true;
                 }
             } else
                 throw NoMoreCards();
@@ -37,36 +39,81 @@ Board::~Board()
 
 const bool Board::isFaceUp( const Letter& letter, const Number& number)
 {
-
-    //returns true if the card at a given position is
-    //face up. Letter and Number are enumerations. Throws an exception of type OutOfRange if an invalid
-    //Letter and Number combination was given.
-    return true;
+    //TODO: Throws an exception of type OutOfRange if an invalid
+    int row = convertLetterToIndex(letter);
+    int col = convertNumberToIndex(number);
+    
+    return !cardFaceDown[row][col];
 }
 
 bool Board::turnFaceUp( const Letter& letter, const Number& number )
 {
-    //    changes the state of the specified card return false
-    //if card was up already. Throws an exception of type OutOfRange if an invalid Letter and Number
-    //combination was given.
-    return true;
+    //TODO: Throws an exception of type OutOfRange if an invalid Letter and Number
+    
+    int row = convertLetterToIndex(letter);
+    int col = convertNumberToIndex(number);
+    
+    if(!cardFaceDown[row][col]){
+        return false;
+    } else {
+        cardFaceDown[row][col] = false;
+        return true;
+    }
 }
 
 bool Board::turnFaceDown( const Letter& letter, const Number& number )
 {
-    //    changes the state of the specified card return
-    //false if card was down already. Throws an exception of type OutOfRange if an invalid Letter and
-    //Number combination was given.
-    return true;
+    //TODO Throws an exception of type OutOfRange if an invalid Letter and
+
+    int row = convertLetterToIndex(letter);
+    int col = convertNumberToIndex(number);
+    
+    if(cardFaceDown[row][col]){
+        return false;
+    } else {
+        cardFaceDown[row][col] = true;
+        return true;
+    }
+}
+
+int Board::convertLetterToIndex(const Letter& letter){
+    for(int i = 0; i < 5; i++){
+        Letter letterAtIndex = static_cast<Letter>(i);
+        if(letterAtIndex == letter){
+            return i;
+        }
+    }
+    
+    return -1;
+}
+
+int Board::convertNumberToIndex(const Number& number){
+    for(int i = 0; i < 5; i++){
+        Number numberAtIndex = static_cast<Number>(i);
+        if(numberAtIndex == number){
+            return i;
+        }
+    }
+    
+    return -1;
 }
 
 void Board::reset()
 {
-    //changes the state to all cards to be face down
+    for(int i = 0; i < 5; i++){
+        for(int j = 0; j < 5; j++){
+            if(i == 2 && j == 2){
+                cardFaceDown[i][j] = NULL;
+            } else {
+                cardFaceDown[i][j] = true;
+            }
+        }
+    }
 }
 
 Card* Board::getCard( const Letter& letter, const Number& number )
 {
+    
     // returns a pointer to the card at a given location. Throws an exception of type OutOfRange if an invalid Letter and Number combination was given
     return NULL;
 }
@@ -112,7 +159,11 @@ void Board::displayBoard()
             
             for(int col = 0; col < 5; col++){
                 if(cardBoard[row][col] != NULL){
-                    rowText += (*cardBoard[row][col])(rowLoop);
+                    if(!cardFaceDown[row][col]){
+                        rowText += (*cardBoard[row][col])(rowLoop);
+                    } else {
+                        rowText += "zzz";
+                    }
                 } else {
                     rowText += "   ";
                 }

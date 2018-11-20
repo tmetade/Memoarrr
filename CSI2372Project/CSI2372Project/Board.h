@@ -29,6 +29,9 @@ public:
 private:
     CardDeck &cardDeck = CardDeck::make_CardDeck();
     Card* cardBoard [5][5];
+    bool cardFaceDown[5][5];
+    int convertLetterToIndex(const Letter&);
+    int convertNumberToIndex(const Number&);
 };
 
 #endif
