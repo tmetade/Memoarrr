@@ -1,15 +1,26 @@
 #include <iostream>
+#include <stdlib.h>
 
 #include "Board.h"
 #include "CardDeck.h"
 #include "Deck.h"
+#include "Game.h"
 #include "Player.h"
 #include "RewardDeck.h"
 #include "Rules.h"
 
 using namespace std;
 
-int main(int argc, const char * argv[]) {
+void printCards(Card* card1, Card* card2, Card* card3)
+{
+    cout << (*card1)(0) << " " << (*card2)(0) << " " << (*card3)(0) << endl;
+    cout << (*card1)(1) << " " << (*card2)(1) << " " << (*card3)(1) << endl;
+    cout << (*card1)(2) << " " << (*card2)(2) << " " << (*card3)(2) << endl;
+    cout << endl;
+}
+
+int main(int argc, const char * argv[])
+{
     int gameVersion = 0, nPlayers = 0;
     
     while(gameVersion<1 || gameVersion > 3)
@@ -49,7 +60,53 @@ int main(int argc, const char * argv[]) {
     
     while(gameRules.gameOver(*game))
     {
-        //for each player reveal 3 cards
+        gameBoard->reset();
+        
+        for (int i = 1; i <= nPlayers; i++)
+        {
+            Player temp = game->getPlayer((Player::Side)i);
+            cout << "Displaying Cards for " << temp;
+            
+            Card* card1;
+            Card* card2;
+            Card* card3;
+            
+            switch(temp.getSide())
+            {
+                case Player::top :
+                {
+                    card1 = gameBoard->getCard(Board::A, Board::two);
+                    card2 = gameBoard->getCard(Board::A, Board::three);
+                    card3 = gameBoard->getCard(Board::A, Board::four);
+                    printCards(card1, card2, card3);
+                    break;
+                }
+                case Player::bottom :
+                {
+                    card1 = gameBoard->getCard(Board::E, Board::two);
+                    card2 = gameBoard->getCard(Board::E, Board::three);
+                    card3 = gameBoard->getCard(Board::E, Board::four);
+                    printCards(card1, card2, card3);
+                    break;
+                }
+                case Player::left :
+                {
+                    card1 = gameBoard->getCard(Board::B, Board::one);
+                    card2 = gameBoard->getCard(Board::C, Board::one);
+                    card3 = gameBoard->getCard(Board::D, Board::one);
+                    printCards(card1, card2, card3);
+                    break;
+                }
+                case Player::right :
+                {
+                    card1 = gameBoard->getCard(Board::B, Board::five);
+                    card2 = gameBoard->getCard(Board::C, Board::five);
+                    card3 = gameBoard->getCard(Board::D, Board::five);
+                    printCards(card1, card2, card3);
+                    break;
+                }
+            }
+        }
         
         while(!gameRules.roundOver(*game))
         {
