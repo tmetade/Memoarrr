@@ -31,7 +31,7 @@ Card::Card(FaceAnimal animal, FaceBackground colour){
     for(int i = 0; i < 3; i++){
         currentRow = "";
         for(int j = 0; j < 3; j++){
-            if(i == j){
+            if(i == 1 && j == 1){
                 currentRow += animalChar;
             } else {
                 currentRow += colourChar;

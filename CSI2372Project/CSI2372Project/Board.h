@@ -14,7 +14,7 @@ public:
     
     enum Letter {A, B, C, D, E};
     enum Number {one = 1, two = 2, three = 3, four = 4, five = 5};
-    std::string boardDisplay [26][21];
+    std::string boardDisplay[21];
     
     const bool isFaceUp( const Letter&, const Number&);
     bool turnFaceUp( const Letter&, const Number& );

@@ -20,8 +20,9 @@ public:
     
     friend class CardDeck;
     
-private:
     std::string operator()(int row) { return face[row]; }
+
+private:
     Card(FaceAnimal, FaceBackground);
 };
 

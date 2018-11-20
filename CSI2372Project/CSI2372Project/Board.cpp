@@ -10,19 +10,24 @@ struct NoMoreCards : public std::exception
 
 Board::Board(int gameVersion)
 {
-    if (gameVersion == 1)
-        displayBoard();
-    
     for(int i = 0; i < 5; i++)
     {
         for(int j = 0; j < 5; j++)
         {
-            if(!cardDeck.isEmpty())
-                cardBoard[i][j] = cardDeck.getNext();
-            else
+            if(!cardDeck.isEmpty()){
+                if(i == 2 && j == 2){
+                    cardBoard[i][j] = nullptr;
+                } else {
+                    cardBoard[i][j] = cardDeck.getNext();
+                }
+            } else
                 throw NoMoreCards();
         }
     }
+    
+    if (gameVersion == 1)
+        displayBoard();
+    
 }
 
 Board::~Board()
@@ -71,44 +76,92 @@ void Board::setCard(const Letter& letter, const Number& number, Card* card)
     
 }
 
+void constructDisplayFromCards(){
+    
+}
+
 void Board::displayBoard()
 {
-    for(int i = 0; i < 26; i++)
-    {
-        for (int j = 0; j < 21; j++)
-        {
-            if (j==0 || j==1 || j==5 || j==9 || j==13 || j==17 || i==3 || i==4 || i==8 || i==9 || i==13 || i==14 || i==18 || i==19 || i==23 || i==24 || i==25 || (i==10 &&j==10) || (i==10 &&j==11) ||(i==10 &&j==12) || (i==11 &&j==10) || (i==11 &&j==11) ||(i==11 &&j==12) || (i==12 &&j==10) || (i==12 &&j==11) ||(i==12 &&j==12))
-            {
-                boardDisplay[i][j] = " ";
+    int boardRow = 0;
+    std::string rowText;
+    
+    for(int row = 0; row < 5; row++){
+        for(int rowLoop = 0; rowLoop < 3; rowLoop++){
+            
+            if(rowLoop == 0 || rowLoop == 2){
+                rowText = "  ";
+            } else {
+                switch(row){
+                    case 0:
+                        rowText = "A ";
+                        break;
+                    case 1:
+                        rowText = "B ";
+                        break;
+                    case 2:
+                        rowText = "C ";
+                        break;
+                    case 3:
+                        rowText = "D ";
+                        break;
+                    case 4:
+                        rowText = "E ";
+                        break;
+                }
             }
-            else
-            {
-                boardDisplay[i][j] = "z";
+            
+            for(int col = 0; col < 5; col++){
+                if(cardBoard[row][col] != NULL){
+                    rowText += (*cardBoard[row][col])(rowLoop);
+                } else {
+                    rowText += "   ";
+                }
+                rowText += " ";
             }
+            boardRow++;
+            boardDisplay[boardRow] = rowText;
+        }
+        boardRow++;
+        rowText = "";
+        for(int blankSpaces = 0; blankSpaces < 21; blankSpaces++){
+            rowText += " ";
+        }
+        boardDisplay[boardRow] = rowText;
+    }
+    rowText = "";
+
+    for(int bottomNavigation = 0; bottomNavigation < 21; bottomNavigation++){
+        switch (bottomNavigation) {
+            case 3:
+                rowText += "1";
+                break;
+            case 7:
+                rowText += "2";
+                break;
+            case 11:
+                rowText += "3";
+                break;
+            case 15:
+                rowText += "4";
+                break;
+            case 19:
+                rowText += "5";
+                break;
+            default:
+                rowText += " ";
+                break;
         }
     }
     
-    boardDisplay[25][2] = "1";
-    boardDisplay[25][6] = "2";
-    boardDisplay[25][10] = "3";
-    boardDisplay[25][14] = "4";
-    boardDisplay[25][18] = "5";
-    boardDisplay[1][0] = "A";
-    boardDisplay[6][0] = "B";
-    boardDisplay[11][0] = "C";
-    boardDisplay[16][0] = "D";
-    boardDisplay[21][0] = "E";
+    boardDisplay[boardRow] = rowText;
 }
 
 std::ostream& operator<<(std::ostream& os, const Board& board)
 {
-    for(int i = 0; i < 27; i++)
+    for(int i = 0; i < 21; i++)
     {
-        for (int j = 0; j < 20; j++)
-        {
-           os<< board.boardDisplay[i][j] ;
-        }
-        os<<std::endl;
+        os << board.boardDisplay[i];
+        os << std::endl;
     }
     return os;
 }
