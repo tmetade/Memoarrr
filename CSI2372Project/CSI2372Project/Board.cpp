@@ -40,8 +40,8 @@ Board::~Board()
 const bool Board::isFaceUp( const Letter& letter, const Number& number)
 {
     //TODO: Throws an exception of type OutOfRange if an invalid
-    int row = convertLetterToIndex(letter);
-    int col = convertNumberToIndex(number);
+    int row = letter;
+    int col = number - 1;
     
     return !cardFaceDown[row][col];
 }
@@ -50,8 +50,8 @@ bool Board::turnFaceUp( const Letter& letter, const Number& number )
 {
     //TODO: Throws an exception of type OutOfRange if an invalid Letter and Number
     
-    int row = convertLetterToIndex(letter);
-    int col = convertNumberToIndex(number);
+    int row = letter;
+    int col = number - 1;
     
     if(!cardFaceDown[row][col]){
         return false;
@@ -65,8 +65,8 @@ bool Board::turnFaceDown( const Letter& letter, const Number& number )
 {
     //TODO Throws an exception of type OutOfRange if an invalid Letter and
 
-    int row = convertLetterToIndex(letter);
-    int col = convertNumberToIndex(number);
+    int row = letter;
+    int col = number - 1;
     
     if(cardFaceDown[row][col]){
         return false;
@@ -74,28 +74,6 @@ bool Board::turnFaceDown( const Letter& letter, const Number& number )
         cardFaceDown[row][col] = true;
         return true;
     }
-}
-
-int Board::convertLetterToIndex(const Letter& letter){
-    for(int i = 0; i < 5; i++){
-        Letter letterAtIndex = static_cast<Letter>(i);
-        if(letterAtIndex == letter){
-            return i;
-        }
-    }
-    
-    return -1;
-}
-
-int Board::convertNumberToIndex(const Number& number){
-    for(int i = 0; i < 5; i++){
-        Number numberAtIndex = static_cast<Number>(i);
-        if(numberAtIndex == number){
-            return i;
-        }
-    }
-    
-    return -1;
 }
 
 void Board::reset()
