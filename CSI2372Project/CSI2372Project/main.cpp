@@ -42,18 +42,17 @@ int main(int argc, const char * argv[]) {
     {
         Player newPlayer(playerNames[i]);
         game->addPlayer(newPlayer);
-        cout << newPlayer;
     }
     CardDeck &cardDeck = CardDeck::make_CardDeck();
     RewardDeck &rewardDeck = RewardDeck::make_RewardDeck();
     
-    cout<<*gameBoard;
+    cout<< *game;
     
     
     while(gameRules.gameOver(*game))
     {
-        cardDeck.shuffle();
-        rewardDeck.shuffle();
+        gameBoard->reset();
+        
     }
     
     return 0;

@@ -4,36 +4,8 @@ Board::Board(int gameVersion)
 {
     bool displayCoordinates = true;
     
-    if (gameVersion != 1)
-        displayCoordinates = false;
-    
-    for(int i = 0; i < 26; i++)
-    {
-        for (int j = 0; j < 21; j++)
-        {
-            if (j==0 || j==1 || j==5 || j==9 || j==13 || j==17 || i==3 || i==4 || i==8 || i==9 || i==13 || i==14 || i==18 || i==19 || i==23 || i==24 || i==25 || (i==10 &&j==10) || (i==10 &&j==11) ||(i==10 &&j==12) || (i==11 &&j==10) || (i==11 &&j==11) ||(i==11 &&j==12) || (i==12 &&j==10) || (i==12 &&j==11) ||(i==12 &&j==12))
-            {
-                boardDisplay[i][j] = " ";
-            }
-            else
-            {
-                boardDisplay[i][j] = "z";
-            }
-        }
-    }
-    if (displayCoordinates)
-    {
-        boardDisplay[25][2] = "1";
-        boardDisplay[25][6] = "2";
-        boardDisplay[25][10] = "3";
-        boardDisplay[25][14] = "4";
-        boardDisplay[25][18] = "5";
-        boardDisplay[1][0] = "A";
-        boardDisplay[6][0] = "B";
-        boardDisplay[11][0] = "C";
-        boardDisplay[16][0] = "D";
-        boardDisplay[21][0] = "E";
-    }
+    if (gameVersion == 1)
+        displayBoard();
     //the constructor for the board should throw an exception of type NoMoreCards if there are no more cards available to construct the board
 }
 
@@ -81,6 +53,35 @@ Card* Board::getCard( const Letter& letter, const Number& number )
 void Board::setCard(const Letter& letter, const Number& number, Card* card)
 {
     
+}
+
+void Board::displayBoard()
+{
+    for(int i = 0; i < 26; i++)
+    {
+        for (int j = 0; j < 21; j++)
+        {
+            if (j==0 || j==1 || j==5 || j==9 || j==13 || j==17 || i==3 || i==4 || i==8 || i==9 || i==13 || i==14 || i==18 || i==19 || i==23 || i==24 || i==25 || (i==10 &&j==10) || (i==10 &&j==11) ||(i==10 &&j==12) || (i==11 &&j==10) || (i==11 &&j==11) ||(i==11 &&j==12) || (i==12 &&j==10) || (i==12 &&j==11) ||(i==12 &&j==12))
+            {
+                boardDisplay[i][j] = " ";
+            }
+            else
+            {
+                boardDisplay[i][j] = "z";
+            }
+        }
+    }
+    
+    boardDisplay[25][2] = "1";
+    boardDisplay[25][6] = "2";
+    boardDisplay[25][10] = "3";
+    boardDisplay[25][14] = "4";
+    boardDisplay[25][18] = "5";
+    boardDisplay[1][0] = "A";
+    boardDisplay[6][0] = "B";
+    boardDisplay[11][0] = "C";
+    boardDisplay[16][0] = "D";
+    boardDisplay[21][0] = "E";
 }
 
 std::ostream& operator<<(std::ostream& os, const Board& board)

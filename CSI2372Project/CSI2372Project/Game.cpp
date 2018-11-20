@@ -5,7 +5,7 @@
 Game::Game(Board *board)
 : round(0)
 , currentCard()
-//, currentPlayer()
+, gameBoard(board)
 {
     
 }
@@ -15,9 +15,9 @@ Game::~Game()
     
 }
 
-void Game::addPlayer( const Player& )
+void Game::addPlayer( const Player& player)
 {
-    //which adds a Player to this game
+    gamePlayers.push_back(player);
 }
 
 const Card* Game::getPreviousCard()
@@ -46,4 +46,13 @@ void Game::setCard(const Board::Letter& letter, const Board::Number& number, Car
     //which calls the corresponding method in Board
 }
 
-//A game must be printable with the insertion operator cout << game. It should display the board and all players. 
+std::ostream& operator<<(std::ostream& os, const Game &game)
+{
+    std::vector<Player> tempVec = game.getPlayers();
+    for (std::vector<Player>::iterator it = tempVec.begin(); it != tempVec.end(); ++it)
+    {
+        os << *it;
+    }
+    os << game.getBoard() <<std::endl;
+    return os;
+}

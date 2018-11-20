@@ -2,6 +2,7 @@
 #define Game_h
 
 #include <stdio.h>
+#include <vector>
 
 #include "Board.h"
 #include "Card.h"
@@ -21,10 +22,16 @@ public:
     void setCurrentCard( const Card* card);
     Card* getCard( const Board::Letter&, const Board::Number&);
     void setCard( const Board::Letter&, const Board::Number&, Card*);
+    Board& getBoard() const { return *gameBoard; };
+    std::vector<Player> getPlayers() const { return gamePlayers; };
+    
+    friend std::ostream& operator<<(std::ostream& os, const Game&);
     
 private:
     int round;
     const Card *currentCard;
+    Board *gameBoard;
+    std::vector<Player> gamePlayers;
 };
 
 #endif
