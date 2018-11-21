@@ -4,6 +4,7 @@
 
 Game::Game(Board *board)
 : round(0)
+, numPlayers(0)
 , currentCard()
 , gameBoard(board)
 {
@@ -18,11 +19,20 @@ Game::~Game()
 void Game::addPlayer( const Player& player)
 {
     gamePlayers.push_back(player);
+    numPlayers++;
 }
 
 Player& Game::getPlayer (Player::Side side) const
 {
-    return const_cast<Player&>(gamePlayers.at(side-1));
+    Player *ptr = nullptr;
+    Player &ref = *ptr;
+    
+    if(side > numPlayers-1)
+    {
+        return ref;
+    }
+    
+    return const_cast<Player&>(gamePlayers.at(side));
 }
 
 void Game::setCurrentCard(const Card* card)
@@ -39,13 +49,6 @@ Card* Game::getCard(const Board::Letter& letter, const Board::Number& number)
 void Game::setCard(const Board::Letter& letter, const Board::Number& number, Card* card)
 {
     //which calls the corresponding method in Board
-}
-
-void Game::reset()
-{
-    gameBoard->reset();
-    for (std::vector<Player>::iterator it = gamePlayers.begin(); it != gamePlayers.end(); ++it)
-        it->setActive(true);
 }
 
 std::ostream& operator<<(std::ostream& os, const Game &game)

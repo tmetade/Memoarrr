@@ -30,10 +30,12 @@ bool Rules::roundOver(const Game& game)
     Player *currentPlayer;
     int numOfActivePlayers = 0;
     
-    for(int  i = 0; i < 4; i++){
+    for(int  i = 0; i < 4; i++)
+    {
         currentPlayer = &game.getPlayer((Player::Side)i);
         
-        if(currentPlayer != nullptr && currentPlayer->isActive()){
+        if(currentPlayer != nullptr && currentPlayer->isActive())
+        {
             numOfActivePlayers++;
         }
     }
@@ -43,15 +45,21 @@ bool Rules::roundOver(const Game& game)
 
 const Player& Rules::getNextPlayer(const Game& game)
 {
-    const Player *currentPlayer;
+    int playerSide = currentPlayerSide;
     
-    for(int  i = 0; i < 4; i++){
-        currentPlayer = &game.getPlayer((Player::Side)i);
-        
-        if(currentPlayer != nullptr && currentPlayer->isActive()){
-            break;
-        }
+    const Player *currentPlayer = nullptr;
+    currentPlayer = &game.getPlayer((Player::Side)playerSide);
+    
+    while (currentPlayer == nullptr)
+    {
+        playerSide++;
+        playerSide = playerSide%4;
+        currentPlayer = &game.getPlayer((Player::Side)playerSide);
     }
+    playerSide++;
+    playerSide = playerSide%4;
+
+    currentPlayerSide = (Player::Side)playerSide;
     
     return *currentPlayer;
 }

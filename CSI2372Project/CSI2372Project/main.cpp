@@ -11,6 +11,7 @@
 
 using namespace std;
 
+// prints 3 cards side by side
 void printCards(Card* card1, Card* card2, Card* card3)
 {
     cout << (*card1)(0) << " " << (*card2)(0) << " " << (*card3)(0) << endl;
@@ -56,15 +57,21 @@ int main(int argc, const char * argv[])
         game->addPlayer(newPlayer);
     }
     
-    cout<< *game;
+    //prints the players and the board
+    cout << *game;
     
-    while(gameRules.gameOver(*game))
+    while(!gameRules.gameOver(*game))
     {
+        //reset the game for a new round
         gameBoard->reset();
         
-        for (int i = 1; i <= nPlayers; i++)
+        for (int i = 0; i < nPlayers; i++)
         {
             Player temp = game->getPlayer((Player::Side)i);
+            //sets all players to active
+            temp.setActive(true);
+            
+            //displaying the 3 cards infront of each player
             cout << "Displaying Cards for " << temp;
             
             Card* card1;
@@ -110,10 +117,25 @@ int main(int argc, const char * argv[])
         
         while(!gameRules.roundOver(*game))
         {
-            std::string cardCoord;
-            //Player nextPlayer = gameRules.getNextPlayer(*game);
+            std::string cardCoord = "D8";
+            
+            //get next active player
+            Player nextPlayer = gameRules.getNextPlayer(*game);
+            cout << nextPlayer;
+            
+            //assuming we are given the correct coordinates
             cout << "Enter in a card coordinate you would like to reveal: (eg. A2)";
             cin >> cardCoord;
+            
+            switch(cardCoord.at(0))
+            {
+                case 'A' :
+                {
+                    cout<<"hit me baby";
+                    gameBoard->turnFaceUp(Board::A, Board::two);
+                    break;
+                }
+            }
             
             //update Board
             if(!gameRules.isValid(*game))

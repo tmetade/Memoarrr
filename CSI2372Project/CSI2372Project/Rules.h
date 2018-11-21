@@ -15,6 +15,9 @@ public:
     bool gameOver(const Game&);
     bool roundOver(const Game&);
     const Player& getNextPlayer(const Game&);
+    
+private:
+    Player::Side currentPlayerSide = Player::top;
 };
 
 #endif

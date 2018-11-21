@@ -28,10 +28,10 @@ public:
 protected:
     Board& getBoard() const { return *gameBoard; };
     std::vector<Player> getPlayers() const { return gamePlayers; };
-    void reset(); // resets board and sets all players to active
     
 private:
     int round;
+    int numPlayers;
     const Card * currentCard;
     const Card * previousCard;
     Board *gameBoard;

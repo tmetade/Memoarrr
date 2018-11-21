@@ -53,9 +53,11 @@ bool Board::turnFaceUp( const Letter& letter, const Number& number )
     int row = letter;
     int col = number - 1;
     
-    if(!cardFaceDown[row][col]){
+    if(!cardFaceDown[row][col])
         return false;
-    } else {
+    else
+    {
+        std::cout<<"turn me";
         cardFaceDown[row][col] = false;
         return true;
     }
@@ -110,13 +112,18 @@ void Board::displayBoard()
     int boardRow = 0;
     std::string rowText;
     
-    for(int row = 0; row < 5; row++){
-        for(int rowLoop = 0; rowLoop < 3; rowLoop++){
-            
-            if(rowLoop == 0 || rowLoop == 2){
+    for(int row = 0; row < 5; row++)
+    {
+        for(int rowLoop = 0; rowLoop < 3; rowLoop++)
+        {
+            if(rowLoop == 0 || rowLoop == 2)
+            {
                 rowText = "  ";
-            } else {
-                switch(row){
+            }
+            else
+            {
+                switch(row)
+                {
                     case 0:
                         rowText = "A ";
                         break;
@@ -135,14 +142,21 @@ void Board::displayBoard()
                 }
             }
             
-            for(int col = 0; col < 5; col++){
-                if(cardBoard[row][col] != NULL){
-                    if(!cardFaceDown[row][col]){
+            for(int col = 0; col < 5; col++)
+            {
+                if(cardBoard[row][col] != NULL)
+                {
+                    if(!cardFaceDown[row][col])
+                    {
                         rowText += (*cardBoard[row][col])(rowLoop);
-                    } else {
+                    }
+                    else
+                    {
                         rowText += "zzz";
                     }
-                } else {
+                }
+                else
+                {
                     rowText += "   ";
                 }
                 rowText += " ";
@@ -152,14 +166,16 @@ void Board::displayBoard()
         }
         boardRow++;
         rowText = "";
-        for(int blankSpaces = 0; blankSpaces < 21; blankSpaces++){
+        for(int blankSpaces = 0; blankSpaces < 21; blankSpaces++)
+        {
             rowText += " ";
         }
         boardDisplay[boardRow] = rowText;
     }
     rowText = "";
 
-    for(int bottomNavigation = 0; bottomNavigation < 21; bottomNavigation++){
+    for(int bottomNavigation = 0; bottomNavigation < 21; bottomNavigation++)
+    {
         switch (bottomNavigation) {
             case 3:
                 rowText += "1";
