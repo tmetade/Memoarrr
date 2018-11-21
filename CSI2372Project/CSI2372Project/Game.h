@@ -14,9 +14,9 @@ public:
     Game(Board *board);
     ~Game();
     
-    int getRound(){ return round; };
+    int getRound() const { return round; };
     void addPlayer( const Player& );
-    Player& getPlayer(Player::Side);
+    Player& getPlayer(Player::Side) const;
     const Card* getPreviousCard() { return previousCard; };
     const Card* getCurrentCard() { return currentCard; };
     void setCurrentCard( const Card* card);
@@ -32,8 +32,8 @@ protected:
     
 private:
     int round;
-    const Card *currentCard;
-    const Card *previousCard;
+    const Card * currentCard;
+    const Card * previousCard;
     Board *gameBoard;
     std::vector<Player> gamePlayers;
 };

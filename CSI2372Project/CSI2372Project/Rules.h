@@ -11,10 +11,10 @@ public:
     Rules(int ruleType);
     ~Rules();
     
-    bool isValid(const Game&);
+    bool isValid(const Game&) const;
     bool gameOver(const Game&);
     bool roundOver(const Game&);
-    //const Player& getNextPlayer(const Game&);
+    const Player& getNextPlayer(const Game&);
 };
 
 #endif

@@ -12,26 +12,46 @@ Rules::~Rules()
     
 }
 
-bool Rules::isValid(const Game& game)
+bool Rules::isValid(const Game& game) const
 {
-    // returns true is previous and current card match; false otherwise. 
+    //no idea how to do this LOL
+    
+    //return (*game.getCurrentCard())(2) == (game.getPreviousCard())(2);
     return true;
 }
 
 bool Rules::gameOver(const Game& game)
 {
-    //returns true if the number of rounds has reached 7
-    return true;
+    return game.getRound() == 7;
 }
 
 bool Rules::roundOver(const Game& game)
 {
-    //  returns true if there is only one active Player left.
-    return false;
+    Player *currentPlayer;
+    int numOfActivePlayers = 0;
+    
+    for(int  i = 0; i < 4; i++){
+        currentPlayer = &game.getPlayer((Player::Side)i);
+        
+        if(currentPlayer != nullptr && currentPlayer->isActive()){
+            numOfActivePlayers++;
+        }
+    }
+    
+    return numOfActivePlayers == 1;
 }
 
-//const Player& Rules::getNextPlayer(const Game& game)
-//{
-//    return game.getPlayer((Player::Side)1);
-//}
-
+const Player& Rules::getNextPlayer(const Game& game)
+{
+    const Player *currentPlayer;
+    
+    for(int  i = 0; i < 4; i++){
+        currentPlayer = &game.getPlayer((Player::Side)i);
+        
+        if(currentPlayer != nullptr && currentPlayer->isActive()){
+            break;
+        }
+    }
+    
+    return *currentPlayer;
+}
