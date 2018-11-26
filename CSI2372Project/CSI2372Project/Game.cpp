@@ -16,6 +16,13 @@ Game::~Game()
     
 }
 
+void Game::nextRound()
+{
+    round++;
+    currentCard = nullptr;
+    previousCard = nullptr;
+}
+
 void Game::addPlayer( const Player& player)
 {
     gamePlayers.push_back(player);

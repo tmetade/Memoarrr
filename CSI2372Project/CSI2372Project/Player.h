@@ -17,7 +17,7 @@ public:
     std::string sideString[4] = {"top", "bottom", "left", "right"};
     
     std::string getName() const { return playerName; };
-    void setActive(bool playerActive){ active = playerActive; };
+    void setActive(bool playerActive) { active = playerActive; };
     bool isActive() const { return active; };
     int getNRubies() const { return nRubies; };
     void addReward(const Reward& reward);

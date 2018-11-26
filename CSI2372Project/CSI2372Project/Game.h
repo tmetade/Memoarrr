@@ -15,6 +15,7 @@ public:
     ~Game();
     
     int getRound() const { return round; };
+    void nextRound();
     void addPlayer( const Player& );
     Player& getPlayer(Player::Side) const;
     const Card* getPreviousCard() const { return previousCard; };

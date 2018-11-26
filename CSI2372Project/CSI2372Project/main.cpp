@@ -50,6 +50,8 @@ int main(int argc, const char * argv[])
     Rules gameRules(gameVersion);
     Board *gameBoard = new Board(gameVersion);
     Game *game = new Game(gameBoard);
+    RewardDeck *rewardDeck = &RewardDeck::make_RewardDeck();
+    
     for (int i = 0; i<nPlayers; i++)
     {
         Player newPlayer(playerNames[i]);
@@ -67,9 +69,8 @@ int main(int argc, const char * argv[])
         
         for (int i = 0; i < nPlayers; i++)
         {
+            game->getPlayer((Player::Side)i).setActive(true);
             Player temp = game->getPlayer((Player::Side)i);
-            //sets all players to active
-            temp.setActive(true);
             
             //displaying the 3 cards infront of each player
             cout << "Displaying Cards for " << temp;
@@ -188,24 +189,34 @@ int main(int argc, const char * argv[])
                 }
             }
             
-            gameBoard->turnFaceUp(letterSelection, numberSelection);
-            game->setCurrentCard(gameBoard->getCard(letterSelection, numberSelection));
+            //might want to ask user to add a new coordinate
+            if(gameBoard->turnFaceUp(letterSelection, numberSelection))
+                game->setCurrentCard(gameBoard->getCard(letterSelection, numberSelection));
             
             //update Board
             if(!gameRules.isValid(*game))
             {
                 cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << std::endl;
-                currentPlayer.setActive(false);
+                game->getPlayer(currentPlayer.getSide()).setActive(false);
             }
-            
             cout << *game;
         }
-        cout << "REWARD ALL THE WINNERS FOR THE ROUND" << std::endl;
-        //remaing active player gets reward
+        cout << "REWARD ALL THE WINNERS FOR THE ROUND" << endl;
+        for(int i = 0; i<nPlayers; i++)
+        {
+            Player lastPlayer = game->getPlayer((Player::Side)i);
+            Reward *playerReward = rewardDeck->getNext();
+            if(lastPlayer.isActive())
+                lastPlayer.addReward(*playerReward);
+        }
+        game->nextRound();
+        cout << "Next Round Starting!" <<endl;
     }
     
     // print players with their number of rubies sorted form least to most rubies
     // print overall winner
+    
+    cout << "GAME OVER!" << std::endl;
     
     return 0;
 }
