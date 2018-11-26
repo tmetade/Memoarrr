@@ -14,10 +14,18 @@ Rules::~Rules()
 
 bool Rules::isValid(const Game& game) const
 {
-    //no idea how to do this LOL
+    const Card * prevCard = game.getPreviousCard();
+    const Card * currCard = game.getCurrentCard();
     
-    //return (*game.getCurrentCard())(2) == (game.getPreviousCard())(2);
-    return true;
+    //if first card flipped
+    //OR curr card background matches prev card background
+    //OR curr card face matches prev card face
+    if(prevCard == nullptr || prevCard->face[0] == currCard->face[0] ||
+       prevCard->face[1].at(1) == currCard->face[1].at(1)){
+        return true;
+    }
+    
+    return false;
 }
 
 bool Rules::gameOver(const Game& game)

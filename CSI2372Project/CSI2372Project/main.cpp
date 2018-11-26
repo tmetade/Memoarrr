@@ -120,31 +120,87 @@ int main(int argc, const char * argv[])
             std::string cardCoord = "D8";
             
             //get next active player
-            Player nextPlayer = gameRules.getNextPlayer(*game);
-            cout << nextPlayer;
+            Player currentPlayer = gameRules.getNextPlayer(*game);
+            cout << currentPlayer;
             
             //assuming we are given the correct coordinates
             cout << "Enter in a card coordinate you would like to reveal: (eg. A2)";
             cin >> cardCoord;
             
+            Board::Letter letterSelection;
+            Board::Number numberSelection;
+            
             switch(cardCoord.at(0))
             {
                 case 'A' :
                 {
-                    cout<<"hit me baby";
-                    gameBoard->turnFaceUp(Board::A, Board::two);
+                    letterSelection = Board::A;
+                    break;
+                }
+                case 'B' :
+                {
+                    letterSelection = Board::B;
+                    break;
+                }
+                case 'C' :
+                {
+                    letterSelection = Board::C;
+                    break;
+                }
+                case 'D' :
+                {
+                    letterSelection = Board::D;
+                    break;
+                }
+                case 'E' :
+                {
+                    letterSelection = Board::E;
                     break;
                 }
             }
             
+            switch(cardCoord.at(1))
+            {
+                case '1' :
+                {
+                    numberSelection = Board::one;
+                    break;
+                }
+                case '2' :
+                {
+                    numberSelection = Board::two;
+                    break;
+                }
+                case '3' :
+                {
+                    numberSelection = Board::three;
+                    break;
+                }
+                case '4' :
+                {
+                    numberSelection = Board::four;
+                    break;
+                }
+                case '5' :
+                {
+                    numberSelection = Board::five;
+                    break;
+                }
+            }
+            
+            gameBoard->turnFaceUp(letterSelection, numberSelection);
+            game->setCurrentCard(gameBoard->getCard(letterSelection, numberSelection));
+            
             //update Board
             if(!gameRules.isValid(*game))
             {
-                //nextPlayer.setActive(false);
+                cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << std::endl;
+                currentPlayer.setActive(false);
             }
             
             cout << *game;
         }
+        cout << "REWARD ALL THE WINNERS FOR THE ROUND" << std::endl;
         //remaing active player gets reward
     }
     

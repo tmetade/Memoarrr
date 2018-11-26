@@ -17,14 +17,13 @@ public:
     int getRound() const { return round; };
     void addPlayer( const Player& );
     Player& getPlayer(Player::Side) const;
-    const Card* getPreviousCard() { return previousCard; };
-    const Card* getCurrentCard() { return currentCard; };
+    const Card* getPreviousCard() const { return previousCard; };
+    const Card* getCurrentCard() const { return currentCard; };
     void setCurrentCard( const Card* card);
     Card* getCard( const Board::Letter&, const Board::Number&);
     void setCard( const Board::Letter&, const Board::Number&, Card*);
     
     friend std::ostream& operator<<(std::ostream& os, const Game&);
-    
 protected:
     Board& getBoard() const { return *gameBoard; };
     std::vector<Player> getPlayers() const { return gamePlayers; };
@@ -32,8 +31,8 @@ protected:
 private:
     int round;
     int numPlayers;
-    const Card * currentCard;
-    const Card * previousCard;
+    const Card * currentCard = NULL;
+    const Card * previousCard = NULL;
     Board *gameBoard;
     std::vector<Player> gamePlayers;
 };

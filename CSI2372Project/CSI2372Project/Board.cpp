@@ -28,7 +28,7 @@ Board::Board(int gameVersion)
     }
     
     if (gameVersion == 1)
-        displayBoard();
+        reconstructBoard();
     
 }
 
@@ -57,8 +57,8 @@ bool Board::turnFaceUp( const Letter& letter, const Number& number )
         return false;
     else
     {
-        std::cout<<"turn me";
         cardFaceDown[row][col] = false;
+        reconstructBoard();
         return true;
     }
 }
@@ -74,6 +74,7 @@ bool Board::turnFaceDown( const Letter& letter, const Number& number )
         return false;
     } else {
         cardFaceDown[row][col] = true;
+        reconstructBoard();
         return true;
     }
 }
@@ -89,6 +90,7 @@ void Board::reset()
             }
         }
     }
+    reconstructBoard();
 }
 
 Card* Board::getCard( const Letter& letter, const Number& number )
@@ -103,11 +105,7 @@ void Board::setCard(const Letter& letter, const Number& number, Card* card)
     
 }
 
-void constructDisplayFromCards(){
-    
-}
-
-void Board::displayBoard()
+void Board::reconstructBoard()
 {
     int boardRow = 0;
     std::string rowText;

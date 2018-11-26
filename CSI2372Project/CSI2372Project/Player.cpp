@@ -35,6 +35,6 @@ std::ostream& operator<<(std::ostream& os, const Player &p)
         activeText = "inactive";
     
     
-    os << p.getName() + " : " + p.getSideString() + " (" + activeText + ")" << std::endl;
+    os << "Player "+ p.getName() + ": " + p.getSideString() + " (" + activeText + ")" << std::endl;
     return os;
 }

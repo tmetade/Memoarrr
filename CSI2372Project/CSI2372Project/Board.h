@@ -22,7 +22,6 @@ public:
     void reset();
     Card* getCard( const Letter&, const Number& );
     void setCard( const Letter&, const Number&, Card* );
-    void displayBoard();
     
     friend std::ostream& operator<<(std::ostream& os, const Board&);
     
@@ -32,6 +31,8 @@ private:
     bool cardFaceDown[5][5];
     int convertLetterToIndex(const Letter&);
     int convertNumberToIndex(const Number&);
+    void reconstructBoard();
+
 };
 
 #endif

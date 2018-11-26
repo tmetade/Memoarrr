@@ -37,6 +37,10 @@ Player& Game::getPlayer (Player::Side side) const
 
 void Game::setCurrentCard(const Card* card)
 {
+    if(currentCard != nullptr){
+        previousCard = currentCard;
+    }
+    
     currentCard = card;
 }
 
