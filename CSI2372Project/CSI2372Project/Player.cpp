@@ -1,4 +1,5 @@
 #include "Player.h"
+#include "Rules.h"
 
 Player::Player(std::string name)
 {
@@ -14,7 +15,7 @@ Player::~Player()
 void Player::addReward(const Reward& reward)
 {
     nRubies += reward;
-    std::cout << "Player rewards: " << nRubies;
+    std::cout << "Player rewards: " << nRubies << std::endl;
 }
 
 void Player::setDisplayMode(bool endOfGame)

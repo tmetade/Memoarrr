@@ -21,9 +21,16 @@ public:
     friend class CardDeck;
     
     std::string operator()(int row) { return face[row]; }
+    
+    operator const FaceAnimal() const { return cardAnimal; };
+    explicit operator FaceAnimal*() const { return (FaceAnimal*)cardAnimal; }
+    
+    operator const FaceBackground() const { return cardColour; };
 
 private:
     Card(FaceAnimal, FaceBackground);
+    FaceAnimal cardAnimal;
+    FaceBackground cardColour;
 };
 
 #endif

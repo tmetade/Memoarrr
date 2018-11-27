@@ -5,7 +5,8 @@ using namespace std;
 
 vector<Reward> RewardDeck::rewards;
 
-RewardDeck& RewardDeck::make_RewardDeck() {
+RewardDeck& RewardDeck::make_RewardDeck()
+{
     RewardDeck* newRewardDeck = new RewardDeck();
     rewards.push_back(Reward(1));
     rewards.push_back(Reward(1));
@@ -28,4 +29,3 @@ Reward* RewardDeck::getNext() {
 void RewardDeck::shuffle() {
     random_shuffle(rewards.begin(), rewards.end());
 }
-

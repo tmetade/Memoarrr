@@ -1,52 +1,57 @@
 #include "Card.h"
 
-Card::Card(FaceAnimal animal, FaceBackground colour){
-    char colourChar, animalChar;
+Card::Card(FaceAnimal animal, FaceBackground colour)
+{
+    cardAnimal = animal;
+    cardColour = colour;
     
-    if(animal == Crab){
+    char colourChar = ' ';
+    char animalChar = ' ';
+    
+    if(animal == Crab)
         animalChar = 'C';
-    } else if (animal == Penguin){
+    else if (animal == Penguin)
         animalChar = 'P';
-    } else if (animal == Octopus){
+    else if (animal == Octopus)
         animalChar = 'O';
-    } else if (animal == Turtle){
+    else if (animal == Turtle)
         animalChar = 'T';
-    } else if(animal == Walrus){
+    else if(animal == Walrus)
         animalChar = 'W';
-    }
     
-    if(colour == Red){
+    if(colour == Red)
         colourChar = 'r';
-    } else if(colour == Green){
+    else if(colour == Green)
         colourChar = 'g';
-    } else if(colour == Purple){
+    else if(colour == Purple)
         colourChar = 'p';
-    } else if(colour == Blue){
+    else if(colour == Blue)
         colourChar = 'b';
-    } else if(colour == Yellow){
+    else if(colour == Yellow)
         colourChar = 'y';
-    }
     
-    std::string currentRow;
-    for(int i = 0; i < 3; i++){
+    std::string currentRow = "";
+    for(int i = 0; i < 3; i++)
+    {
         currentRow = "";
-        for(int j = 0; j < 3; j++){
-            if(i == 1 && j == 1){
+        for(int j = 0; j < 3; j++)
+        {
+            if(i == 1 && j == 1)
                 currentRow += animalChar;
-            } else {
+            else
                 currentRow += colourChar;
-
-            }
         }
         face[i] = currentRow;
     }
-    
 }
 
-Card::FaceAnimal Card::getFaceAnimalAtIndex(int index){
+Card::FaceAnimal Card::getFaceAnimalAtIndex(int index)
+{
     return static_cast<FaceAnimal>(index);
 }
-Card::FaceBackground Card::getFaceBackgroundAtIndex(int index){
+
+Card::FaceBackground Card::getFaceBackgroundAtIndex(int index)
+{
     return static_cast<FaceBackground>(index);
 }
 

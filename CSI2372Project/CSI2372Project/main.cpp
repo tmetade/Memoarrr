@@ -122,89 +122,93 @@ int main(int argc, const char * argv[])
             
             //get next active player
             Player currentPlayer = gameRules.getNextPlayer(*game);
-            cout << currentPlayer;
             
-            //assuming we are given the correct coordinates
-            cout << "Enter in a card coordinate you would like to reveal: (eg. A2)";
-            cin >> cardCoord;
-            
-            Board::Letter letterSelection;
-            Board::Number numberSelection;
-            
-            switch(cardCoord.at(0))
+            if(currentPlayer.isActive())
             {
-                case 'A' :
+                cout << currentPlayer;
+                
+                //assuming we are given the correct coordinates
+                cout << "Enter in a card coordinate you would like to reveal: (eg. A2)";
+                cin >> cardCoord;
+                
+                Board::Letter letterSelection;
+                Board::Number numberSelection;
+                
+                switch(cardCoord.at(0))
                 {
-                    letterSelection = Board::A;
-                    break;
+                    case 'A' :
+                    {
+                        letterSelection = Board::A;
+                        break;
+                    }
+                    case 'B' :
+                    {
+                        letterSelection = Board::B;
+                        break;
+                    }
+                    case 'C' :
+                    {
+                        letterSelection = Board::C;
+                        break;
+                    }
+                    case 'D' :
+                    {
+                        letterSelection = Board::D;
+                        break;
+                    }
+                    case 'E' :
+                    {
+                        letterSelection = Board::E;
+                        break;
+                    }
                 }
-                case 'B' :
+                
+                switch(cardCoord.at(1))
                 {
-                    letterSelection = Board::B;
-                    break;
+                    case '1' :
+                    {
+                        numberSelection = Board::one;
+                        break;
+                    }
+                    case '2' :
+                    {
+                        numberSelection = Board::two;
+                        break;
+                    }
+                    case '3' :
+                    {
+                        numberSelection = Board::three;
+                        break;
+                    }
+                    case '4' :
+                    {
+                        numberSelection = Board::four;
+                        break;
+                    }
+                    case '5' :
+                    {
+                        numberSelection = Board::five;
+                        break;
+                    }
                 }
-                case 'C' :
+                
+                //might want to ask user to add a new coordinate
+                if(gameBoard->turnFaceUp(letterSelection, numberSelection))
+                    game->setCurrentCard(gameBoard->getCard(letterSelection, numberSelection));
+                
+                //update Board
+                if(!gameRules.isValid(*game))
                 {
-                    letterSelection = Board::C;
-                    break;
+                    cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << std::endl;
+                    game->getPlayer(currentPlayer.getSide()).setActive(false);
                 }
-                case 'D' :
-                {
-                    letterSelection = Board::D;
-                    break;
-                }
-                case 'E' :
-                {
-                    letterSelection = Board::E;
-                    break;
-                }
+                cout << *game;
             }
-            
-            switch(cardCoord.at(1))
-            {
-                case '1' :
-                {
-                    numberSelection = Board::one;
-                    break;
-                }
-                case '2' :
-                {
-                    numberSelection = Board::two;
-                    break;
-                }
-                case '3' :
-                {
-                    numberSelection = Board::three;
-                    break;
-                }
-                case '4' :
-                {
-                    numberSelection = Board::four;
-                    break;
-                }
-                case '5' :
-                {
-                    numberSelection = Board::five;
-                    break;
-                }
-            }
-            
-            //might want to ask user to add a new coordinate
-            if(gameBoard->turnFaceUp(letterSelection, numberSelection))
-                game->setCurrentCard(gameBoard->getCard(letterSelection, numberSelection));
-            
-            //update Board
-            if(!gameRules.isValid(*game))
-            {
-                cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << std::endl;
-                game->getPlayer(currentPlayer.getSide()).setActive(false);
-            }
-            cout << *game;
         }
         cout << "REWARD ALL THE WINNERS FOR THE ROUND" << endl;
+        Reward *playerReward = rewardDeck->getNext();
         for(int i = 0; i<nPlayers; i++)
         {
-            Reward *playerReward = rewardDeck->getNext();
             if(game->getPlayer((Player::Side)i).isActive())
                 game->getPlayer((Player::Side)i).addReward(*playerReward);
         }
@@ -212,10 +216,28 @@ int main(int argc, const char * argv[])
         cout << "Next Round Starting!" <<endl;
     }
     
-    // print players with their number of rubies sorted form least to most rubies
-    // print overall winner
+    cout << "Players rubies" <<endl;
     
-    cout << "GAME OVER!" << std::endl;
+    // print players with their number of rubies sorted form least to most rubies
+    
+    int highestRubies = 0;
+    Player highestPlayer = game->getPlayer((Player::Side)1);
+    for (int i = 0; i < nPlayers; i++)
+    {
+        cout << "Players rubies COUNT" <<endl;
+        
+        Player temp = game->getPlayer((Player::Side)i);
+        if(temp.getNRubies() > highestRubies)
+        {
+            highestRubies = temp.getNRubies();
+            highestPlayer = temp;
+        }
+        
+    }
+    
+    cout << "YOUR WINNER IS: " << highestPlayer << endl;
+    
+    cout << "GAME OVER!" << endl;
     
     return 0;
 }
