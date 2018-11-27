@@ -11,11 +11,13 @@ class Reward
     friend class RewardDeck;
 public:
     friend std::ostream& operator<<(std::ostream& os, const Reward&);
+    operator const int() const { return rewardValue; };
     
     ~Reward();
 private:
     int rewardValue;
     Reward(int rubyValue);
+    int getRewardValue(){return rewardValue;};
 };
 
 #endif

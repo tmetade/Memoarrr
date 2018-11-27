@@ -32,7 +32,6 @@ private:
     int convertLetterToIndex(const Letter&);
     int convertNumberToIndex(const Number&);
     void reconstructBoard();
-
 };
 
 #endif

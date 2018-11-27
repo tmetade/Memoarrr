@@ -204,10 +204,9 @@ int main(int argc, const char * argv[])
         cout << "REWARD ALL THE WINNERS FOR THE ROUND" << endl;
         for(int i = 0; i<nPlayers; i++)
         {
-            Player lastPlayer = game->getPlayer((Player::Side)i);
             Reward *playerReward = rewardDeck->getNext();
-            if(lastPlayer.isActive())
-                lastPlayer.addReward(*playerReward);
+            if(game->getPlayer((Player::Side)i).isActive())
+                game->getPlayer((Player::Side)i).addReward(*playerReward);
         }
         game->nextRound();
         cout << "Next Round Starting!" <<endl;

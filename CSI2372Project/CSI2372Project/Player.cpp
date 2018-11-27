@@ -13,7 +13,8 @@ Player::~Player()
 
 void Player::addReward(const Reward& reward)
 {
-    
+    nRubies += reward;
+    std::cout << "Player rewards: " << nRubies;
 }
 
 void Player::setDisplayMode(bool endOfGame)
