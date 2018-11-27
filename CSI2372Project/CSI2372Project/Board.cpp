@@ -205,26 +205,62 @@ void Board::drawBoard()
         
     } else if (gameVersion == 2){ //Expert Display Mode
         std::string cardsRevealed = "";
-        std::vector<Card> cardsFacingUp;
+        std::vector<Card*> cardsFacingUp;
+        std::string letters [5] = {"A", "B", "C", "D", "E"};
+        std::string numbers [5] = {"1", "2", "3", "4", "5"};
+        
         for(int row = 0; row < 5; row++){
             for(int col = 0; col < 5; col++){
-                if(!cardFaceDown[row][col]){
+                if(!cardFaceDown[row][col] && !(row == 2 && col == 2)){
                     
+                    cardsFacingUp.push_back(cardBoard[row][col]);
+                    cardsRevealed += (letters[row] + numbers[col] + "  ");
                 }
             }
         }
         
-        
+        if(cardsFacingUp.size() > 0){
+            std::string rowText;
+            
+            for(int currentRow = 0; currentRow < 3; currentRow++){
+                rowText = "";
+                for(int cardNum = 0; cardNum < cardsFacingUp.size(); cardNum++){
+                    rowText += (*cardsFacingUp.at(cardNum))(currentRow);
+                    rowText += " ";
+                }
+                boardDisplay[currentRow] = rowText;
+            }
+            
+            //blank row
+            rowText = "";
+            for(int blankSpaces = 0; blankSpaces < 21; blankSpaces++)
+            {
+                rowText += " ";
+            }
+            
+            boardDisplay[4] = cardsRevealed;
+        }
     }
     
 }
 
 std::ostream& operator<<(std::ostream& os, const Board& board)
 {
-    for(int i = 0; i < 21; i++)
-    {
-        os << board.boardDisplay[i];
-        os << std::endl;
+    if(board.boardDisplay[0] != ""){
+        if(board.gameVersion == 1){
+            for(int i = 0; i < 21; i++)
+            {
+                os << board.boardDisplay[i];
+                os << std::endl;
+            }
+        } else if (board.gameVersion == 2){
+            for(int i = 0; i < 5; i++)
+            {
+                os << board.boardDisplay[i];
+                os << std::endl;
+            }
+        }
     }
+
     return os;
 }
