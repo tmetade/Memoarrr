@@ -1,4 +1,5 @@
 #include "Board.h"
+#include <vector>
 
 struct NoMoreCards : public std::exception
 {
@@ -10,6 +11,8 @@ struct NoMoreCards : public std::exception
 
 Board::Board(int gameVersion)
 {
+    this->gameVersion = gameVersion;
+    
     for(int i = 0; i < 5; i++)
     {
         for(int j = 0; j < 5; j++)
@@ -28,7 +31,7 @@ Board::Board(int gameVersion)
     }
     
     if (gameVersion == 1)
-        reconstructBoard();
+        drawBoard();
     
 }
 
@@ -58,7 +61,7 @@ bool Board::turnFaceUp( const Letter& letter, const Number& number )
     else
     {
         cardFaceDown[row][col] = false;
-        reconstructBoard();
+        drawBoard();
         return true;
     }
 }
@@ -74,7 +77,7 @@ bool Board::turnFaceDown( const Letter& letter, const Number& number )
         return false;
     } else {
         cardFaceDown[row][col] = true;
-        reconstructBoard();
+        drawBoard();
         return true;
     }
 }
@@ -90,7 +93,7 @@ void Board::reset()
             }
         }
     }
-    reconstructBoard();
+    drawBoard();
 }
 
 Card* Board::getCard( const Letter& letter, const Number& number )
@@ -105,98 +108,115 @@ void Board::setCard(const Letter& letter, const Number& number, Card* card)
     
 }
 
-void Board::reconstructBoard()
+void Board::drawBoard()
 {
-    int boardRow = 0;
-    std::string rowText;
-    
-    for(int row = 0; row < 5; row++)
-    {
-        for(int rowLoop = 0; rowLoop < 3; rowLoop++)
+    //Generic Rules
+    if(this->gameVersion == 1){
+        int boardRow = 0;
+        std::string rowText;
+        
+        for(int row = 0; row < 5; row++)
         {
-            if(rowLoop == 0 || rowLoop == 2)
+            for(int rowLoop = 0; rowLoop < 3; rowLoop++)
             {
-                rowText = "  ";
-            }
-            else
-            {
-                switch(row)
+                if(rowLoop == 0 || rowLoop == 2)
                 {
-                    case 0:
-                        rowText = "A ";
-                        break;
-                    case 1:
-                        rowText = "B ";
-                        break;
-                    case 2:
-                        rowText = "C ";
-                        break;
-                    case 3:
-                        rowText = "D ";
-                        break;
-                    case 4:
-                        rowText = "E ";
-                        break;
-                }
-            }
-            
-            for(int col = 0; col < 5; col++)
-            {
-                if(cardBoard[row][col] != NULL)
-                {
-                    if(!cardFaceDown[row][col])
-                    {
-                        rowText += (*cardBoard[row][col])(rowLoop);
-                    }
-                    else
-                    {
-                        rowText += "zzz";
-                    }
+                    rowText = "  ";
                 }
                 else
                 {
-                    rowText += "   ";
+                    switch(row)
+                    {
+                        case 0:
+                            rowText = "A ";
+                            break;
+                        case 1:
+                            rowText = "B ";
+                            break;
+                        case 2:
+                            rowText = "C ";
+                            break;
+                        case 3:
+                            rowText = "D ";
+                            break;
+                        case 4:
+                            rowText = "E ";
+                            break;
+                    }
                 }
-                rowText += " ";
+                
+                for(int col = 0; col < 5; col++)
+                {
+                    if(cardBoard[row][col] != NULL)
+                    {
+                        if(!cardFaceDown[row][col])
+                        {
+                            rowText += (*cardBoard[row][col])(rowLoop);
+                        }
+                        else
+                        {
+                            rowText += "zzz";
+                        }
+                    }
+                    else
+                    {
+                        rowText += "   ";
+                    }
+                    rowText += " ";
+                }
+                boardRow++;
+                boardDisplay[boardRow] = rowText;
             }
             boardRow++;
+            rowText = "";
+            for(int blankSpaces = 0; blankSpaces < 21; blankSpaces++)
+            {
+                rowText += " ";
+            }
             boardDisplay[boardRow] = rowText;
         }
-        boardRow++;
         rowText = "";
-        for(int blankSpaces = 0; blankSpaces < 21; blankSpaces++)
+        
+        for(int bottomNavigation = 0; bottomNavigation < 21; bottomNavigation++)
         {
-            rowText += " ";
+            switch (bottomNavigation) {
+                case 3:
+                    rowText += "1";
+                    break;
+                case 7:
+                    rowText += "2";
+                    break;
+                case 11:
+                    rowText += "3";
+                    break;
+                case 15:
+                    rowText += "4";
+                    break;
+                case 19:
+                    rowText += "5";
+                    break;
+                default:
+                    rowText += " ";
+                    break;
+            }
         }
+        
         boardDisplay[boardRow] = rowText;
-    }
-    rowText = "";
-
-    for(int bottomNavigation = 0; bottomNavigation < 21; bottomNavigation++)
-    {
-        switch (bottomNavigation) {
-            case 3:
-                rowText += "1";
-                break;
-            case 7:
-                rowText += "2";
-                break;
-            case 11:
-                rowText += "3";
-                break;
-            case 15:
-                rowText += "4";
-                break;
-            case 19:
-                rowText += "5";
-                break;
-            default:
-                rowText += " ";
-                break;
+        
+    } else if (gameVersion == 2){ //Expert Display Mode
+        std::string cardsRevealed = "";
+        std::vector<Card> cardsFacingUp;
+        for(int row = 0; row < 5; row++){
+            for(int col = 0; col < 5; col++){
+                if(!cardFaceDown[row][col]){
+                    
+                }
+            }
         }
+        
+        
     }
     
-    boardDisplay[boardRow] = rowText;
 }
 
 std::ostream& operator<<(std::ostream& os, const Board& board)

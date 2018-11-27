@@ -205,18 +205,18 @@ int main(int argc, const char * argv[])
                 cout << *game;
             }
         }
-        cout << "REWARD ALL THE WINNERS FOR THE ROUND" << endl;
+
         Reward *playerReward = rewardDeck->getNext();
         for(int i = 0; i<nPlayers; i++)
         {
-            if(game->getPlayer((Player::Side)i).isActive())
+            if(game->getPlayer((Player::Side)i).isActive()){
                 game->getPlayer((Player::Side)i).addReward(*playerReward);
+                cout << "Player " << game->getPlayer((Player::Side)i).getName() << " has won the round!" << std::endl;
+            }
         }
         game->nextRound();
         cout << "Next Round Starting!" <<endl;
     }
-    
-    cout << "Players rubies" <<endl;
     
     // print players with their number of rubies sorted form least to most rubies
     
@@ -224,20 +224,24 @@ int main(int argc, const char * argv[])
     Player highestPlayer = game->getPlayer((Player::Side)1);
     for (int i = 0; i < nPlayers; i++)
     {
-        cout << "Players rubies COUNT" <<endl;
+        cout << "Player Ruby Score" << endl;
+        cout << "__________________" << endl;
         
-        Player temp = game->getPlayer((Player::Side)i);
-        if(temp.getNRubies() > highestRubies)
+        Player tempPlayer = game->getPlayer((Player::Side)i);
+        
+        cout << tempPlayer.getName() << " - " << tempPlayer.getNRubies() << endl;
+        
+        if(tempPlayer.getNRubies() > highestRubies)
         {
-            highestRubies = temp.getNRubies();
-            highestPlayer = temp;
+            highestRubies = tempPlayer.getNRubies();
+            highestPlayer = tempPlayer;
         }
         
     }
     
-    cout << "YOUR WINNER IS: " << highestPlayer << endl;
+    cout << "Congratulations! The winner is: " << highestPlayer.getName() << endl;
     
-    cout << "GAME OVER!" << endl;
+    cout << "Thanks for playing! Game over!" << endl;
     
     return 0;
 }

@@ -31,7 +31,8 @@ private:
     bool cardFaceDown[5][5];
     int convertLetterToIndex(const Letter&);
     int convertNumberToIndex(const Number&);
-    void reconstructBoard();
+    void drawBoard();
+    int gameVersion;
 };
 
 #endif
