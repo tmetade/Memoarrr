@@ -21,7 +21,7 @@ public:
     bool isActive() const { return active; };
     int getNRubies() const { return nRubies; };
     void addReward(const Reward& reward);
-    void setDisplayMode(bool endOfGame);
+    void setDisplayMode(bool endOfGame) { displayEndGame = endOfGame; };
     Side getSide() const { return playerSide; };
     void setSide(Side side){ playerSide = side; };
     std::string getSideString() const;
@@ -34,6 +34,7 @@ private:
     bool active;
     int nRubies;
     std::string outputString;
+    bool displayEndGame = false;
 };
 
 #endif
