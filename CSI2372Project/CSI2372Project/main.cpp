@@ -95,7 +95,9 @@ int main(int argc, const char * argv[])
 {
     int gameVersion = 0, nPlayers = 0;
     
-    while(gameVersion < 1 || gameVersion > 3)
+    cout << "Welcome to Memoarrr!" << endl;
+    
+    while(gameVersion<1 || gameVersion > 3)
     {
         cout << "Select your game version: " << std::endl;
         cout << "1-Base Game 2-Expert Display Mode 3-Expert Rules Mode ";
@@ -135,6 +137,8 @@ int main(int argc, const char * argv[])
     
     while(!gameRules.gameOver(*game))
     {
+        cout << "Round Starting!" <<endl;
+        
         //reset the game for a new round
         gameBoard->reset();
         
@@ -144,7 +148,7 @@ int main(int argc, const char * argv[])
             Player temp = game->getPlayer((Player::Side)i);
             
             //displaying the 3 cards infront of each player
-            cout << "Displaying Cards for " << temp;
+            cout << "Displaying Cards for " << temp.getName() << endl;
             
             Card* card1;
             Card* card2;
@@ -189,7 +193,7 @@ int main(int argc, const char * argv[])
         
         while(!gameRules.roundOver(*game))
         {
-            std::string cardCoord = "D8";
+            std::string cardCoord = "";
             
             //get next active player
             Player currentPlayer = gameRules.getNextPlayer(*game);
@@ -221,10 +225,9 @@ int main(int argc, const char * argv[])
                 if(gameBoard->turnFaceUp(letterSelection, numberSelection))
                     game->setCurrentCard(gameBoard->getCard(letterSelection, numberSelection));
                 
-                //update Board
                 if(!gameRules.isValid(*game))
                 {
-                    cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << std::endl;
+                    cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << endl;
                     game->getPlayer(currentPlayer.getSide()).setActive(false);
                 } else {
                     
@@ -340,37 +343,50 @@ int main(int argc, const char * argv[])
         {
             if(game->getPlayer((Player::Side)i).isActive()){
                 game->getPlayer((Player::Side)i).addReward(*playerReward);
-                cout << "Player " << game->getPlayer((Player::Side)i).getName() << " has won the round!" << std::endl;
+                cout << "Player " << game->getPlayer((Player::Side)i).getName() << " has won the round and recieved " << *playerReward << " reward(s) !" << endl;
             }
         }
         game->nextRound();
-        cout << "Next Round Starting!" <<endl;
     }
+
+    cout << " " << endl;
+    cout << "GAME OVER!" << endl;
+    cout << " " << endl;
     
-    // print players with their number of rubies sorted form least to most rubies
-    
-    int highestRubies = 0;
-    Player highestPlayer = game->getPlayer((Player::Side)1);
+    vector<Player> playerRubies;
     for (int i = 0; i < nPlayers; i++)
     {
-        cout << "Player Ruby Score" << endl;
-        cout << "__________________" << endl;
-        
+        game->getPlayer((Player::Side)i).setDisplayMode(true);
         Player tempPlayer = game->getPlayer((Player::Side)i);
-        
-        cout << tempPlayer.getName() << " - " << tempPlayer.getNRubies() << endl;
-        
-        if(tempPlayer.getNRubies() > highestRubies)
-        {
-            highestRubies = tempPlayer.getNRubies();
-            highestPlayer = tempPlayer;
-        }
-        
+        playerRubies.push_back(tempPlayer);
     }
     
-    cout << "Congratulations! The winner is: " << highestPlayer.getName() << endl;
     
-    cout << "Thanks for playing! Game over!" << endl;
+    for (int i = 0; i<playerRubies.size() -1 ; i++)
+    {
+        for (int j = 0 ; j<playerRubies.size()-i-1; j++)
+        {
+            if ( playerRubies[j].getNRubies() > playerRubies[j+1].getNRubies())
+            {
+                Player temp = playerRubies[j];
+                playerRubies[j] = playerRubies[j+1];
+                playerRubies[j+1] = temp;
+            }
+        }
+    }
+    
+    cout << "Final Score" << endl;
+    cout << "-----------" << endl;
+    for (int i = 0; i < playerRubies.size(); i++)
+    {
+         cout << playerRubies[i] << endl;
+    }
+    
+    cout << " " << endl;
+    
+    cout << "Congratulations! The winner is: " << playerRubies[playerRubies.size()-1].getName() << endl;
+    
+    cout << "Thanks for playing!" << endl;
     
     return 0;
 }

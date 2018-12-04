@@ -15,11 +15,6 @@ Player::~Player()
 void Player::addReward(const Reward& reward)
 {
     nRubies += reward;
-    std::cout << "Player rewards: " << nRubies << std::endl;
-}
-
-void Player::setDisplayMode(bool endOfGame)
-{
 }
 
 std::string Player::getSideString() const
@@ -29,14 +24,19 @@ std::string Player::getSideString() const
 
 std::ostream& operator<<(std::ostream& os, const Player &p)
 {
-    os << std::boolalpha;
-    std::string activeText;
-    if(p.isActive())
-        activeText = "active";
+    if(!p.displayEndGame)
+    {
+        
+        std::string activeText;
+        if(p.isActive())
+            activeText = "active";
+        else
+            activeText = "inactive";
+        
+        
+        os << p.getName() << ": " << p.getSideString() << " (" << activeText << ")" << std::endl;
+    }
     else
-        activeText = "inactive";
-    
-    
-    os << "Player "+ p.getName() + ": " + p.getSideString() + " (" + activeText + ")" << std::endl;
+        os << p.getName() << ": " << p.getNRubies() << " rubies";
     return os;
 }
