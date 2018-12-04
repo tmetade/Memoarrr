@@ -20,11 +20,82 @@ void printCards(Card* card1, Card* card2, Card* card3)
     cout << endl;
 }
 
+Board::Letter getLetterFromCoordinate(std::string cardCoord){
+    Board::Letter letterSelection;
+    
+    switch(cardCoord.at(0))
+    {
+        case 'A' :
+        {
+            letterSelection = Board::A;
+            break;
+        }
+        case 'B' :
+        {
+            letterSelection = Board::B;
+            break;
+        }
+        case 'C' :
+        {
+            letterSelection = Board::C;
+            break;
+        }
+        case 'D' :
+        {
+            letterSelection = Board::D;
+            break;
+        }
+        case 'E' :
+        {
+            letterSelection = Board::E;
+            break;
+        }
+    }
+    
+    return letterSelection;
+}
+
+Board::Number getNumberFromCoordinate(std::string cardCoord){
+    Board::Number numberSelection;
+    
+    switch(cardCoord.at(1))
+    {
+        case '1' :
+        {
+            numberSelection = Board::one;
+            break;
+        }
+        case '2' :
+        {
+            numberSelection = Board::two;
+            break;
+        }
+        case '3' :
+        {
+            numberSelection = Board::three;
+            break;
+        }
+        case '4' :
+        {
+            numberSelection = Board::four;
+            break;
+        }
+        case '5' :
+        {
+            numberSelection = Board::five;
+            break;
+        }
+    }
+    
+    return numberSelection;
+}
+
+
 int main(int argc, const char * argv[])
 {
     int gameVersion = 0, nPlayers = 0;
     
-    while(gameVersion<1 || gameVersion > 3)
+    while(gameVersion < 1 || gameVersion > 3)
     {
         cout << "Select your game version: " << std::endl;
         cout << "1-Base Game 2-Expert Display Mode 3-Expert Rules Mode ";
@@ -128,67 +199,21 @@ int main(int argc, const char * argv[])
                 cout << currentPlayer;
                 
                 //assuming we are given the correct coordinates
-                cout << "Enter in a card coordinate you would like to reveal: (eg. A2)";
-                cin >> cardCoord;
-                
+                bool yetToSelectCard = true;
                 Board::Letter letterSelection;
                 Board::Number numberSelection;
                 
-                switch(cardCoord.at(0))
-                {
-                    case 'A' :
-                    {
-                        letterSelection = Board::A;
-                        break;
-                    }
-                    case 'B' :
-                    {
-                        letterSelection = Board::B;
-                        break;
-                    }
-                    case 'C' :
-                    {
-                        letterSelection = Board::C;
-                        break;
-                    }
-                    case 'D' :
-                    {
-                        letterSelection = Board::D;
-                        break;
-                    }
-                    case 'E' :
-                    {
-                        letterSelection = Board::E;
-                        break;
-                    }
-                }
-                
-                switch(cardCoord.at(1))
-                {
-                    case '1' :
-                    {
-                        numberSelection = Board::one;
-                        break;
-                    }
-                    case '2' :
-                    {
-                        numberSelection = Board::two;
-                        break;
-                    }
-                    case '3' :
-                    {
-                        numberSelection = Board::three;
-                        break;
-                    }
-                    case '4' :
-                    {
-                        numberSelection = Board::four;
-                        break;
-                    }
-                    case '5' :
-                    {
-                        numberSelection = Board::five;
-                        break;
+                while(yetToSelectCard){
+                    cout << "Enter in a card coordinate you would like to reveal: (eg. A2)";
+                    cin >> cardCoord;
+                    
+                    letterSelection = getLetterFromCoordinate(cardCoord);
+                    numberSelection = getNumberFromCoordinate(cardCoord);
+                    
+                    if(gameRules.isBlocked(*game, gameBoard->getCard(letterSelection, numberSelection))){
+                        cout << "That card has been blocked by the previous player, please choose another card!";
+                    } else {
+                        yetToSelectCard = false;
                     }
                 }
                 
@@ -201,6 +226,110 @@ int main(int argc, const char * argv[])
                 {
                     cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << std::endl;
                     game->getPlayer(currentPlayer.getSide()).setActive(false);
+                } else {
+                    
+                    //if game version == 3 && the card revealed is matching -> activate card's ability
+                        //if card animal == octopus
+                            //user can enter an adjacent coordinate, that card switches positions the original card
+                        //if card animal == penguin
+                            //can turn a face up card facing downwards
+                            //if the first card revealed, ignore!
+                        //if card animal == walrus
+                            //is able to choose a block a certain location for the next player
+                        //if card == crab
+                            //must turn over another card, if that card does not match the previous card, the player is out!
+                        //if card == turle
+                            //the next player's turn is skipped without penalty!
+                    
+                    if(gameVersion == 3 || gameVersion == 4){
+                        Card * currentCard = gameBoard->getCard(letterSelection, numberSelection);
+                        bool yetToSelect = true;
+                        Board::Letter letter;
+                        Board::Number number;
+                        
+                        switch((*currentCard)(1).at(1)){
+                            case 'O':
+                                //user can enter another coordinate, that card switches positions the original card
+                                cout << *game;
+
+                                break;
+                                
+                            case 'P':
+                                //can turn a face up card facing downwards
+                                //if the first card revealed, ignore!
+                                cout << *game;
+                                
+                                while(yetToSelect){
+                                    cout << "Enter in a upwards facing card coordinate you would like to hide:  ";
+                                    cin >> cardCoord;
+                                    
+                                    letter = getLetterFromCoordinate(cardCoord);
+                                    number = getNumberFromCoordinate(cardCoord);
+
+                                    if(gameBoard->isFaceUp(letter, number)){
+                                        gameBoard->turnFaceDown(letter, number);
+                                        yetToSelect = false;
+                                    } else {
+                                        cout << "Please enter a valid selection of a card facing down!";
+                                    }
+                                }
+                                
+                                break;
+                                
+                            case 'W':
+                                //is able to choose a block a certain location for the next player
+                                cout << *game;
+
+                                while(yetToSelect){
+                                    cout << "Please choose a downwards facing card you'd like to block for the next player.";
+                                    cin >> cardCoord;
+                                    
+                                    letter = getLetterFromCoordinate(cardCoord);
+                                    number = getNumberFromCoordinate(cardCoord);
+            
+                                    if(!gameBoard->isFaceUp(letter, number)){
+                                        Card * selectedCard = gameBoard->getCard(letter, number);
+                                        std::string cardToBeBlocked = selectedCard->face[1];
+                                        gameRules.blockedCard = cardToBeBlocked;
+                                        
+                                        yetToSelect = false;
+                                    } else {
+                                        cout << "Please enter a valid selection of a card facing down!";
+                                    }
+                                }
+                                
+                                break;
+                                
+                            case 'C':
+                                //must turn over another card, if that card does not match the previous card, the player is out!
+                                cout << *game;
+
+                                while(yetToSelect){
+                                    cout << "Please choose another card to unveal!";
+                                    cin >> cardCoord;
+                                    
+                                    letter = getLetterFromCoordinate(cardCoord);
+                                    number = getNumberFromCoordinate(cardCoord);
+                                    
+                                    if(gameBoard->turnFaceUp(letterSelection, numberSelection)){
+                                        game->setCurrentCard(gameBoard->getCard(letterSelection, numberSelection));
+                                    
+                                        if(!gameRules.isValid(*game)){
+                                            cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << std::endl;
+                                            game->getPlayer(currentPlayer.getSide()).setActive(false);
+                                        }
+                                    }
+                                }
+                                
+                                break;
+                                
+                            case 'T':
+                                //the next player's turn is skipped without penalty!
+                                currentPlayer = gameRules.getNextPlayer(*game);
+                                cout << "Skipping " << currentPlayer.getName() << "'s turn!";
+                                break;
+                        }
+                    }
                 }
                 cout << *game;
             }

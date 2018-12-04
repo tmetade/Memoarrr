@@ -4,12 +4,27 @@
 
 Rules::Rules(int ruleType)
 {
-    
+    isHardMode = ruleType == 3 || ruleType == 4;
 }
 
 Rules::~Rules()
 {
     
+}
+
+bool Rules::isBlocked(const Game& game, Card * card){
+    const Card * currCard = game.getCurrentCard();
+    bool sameFace = currCard->face[1] == (*card)(1);
+    
+    if(isHardMode){
+        if(sameFace){
+            return true;
+        } else {
+            blockedCard = "";
+        }
+    }
+    
+    return false;
 }
 
 bool Rules::isValid(const Game& game) const
@@ -20,6 +35,7 @@ bool Rules::isValid(const Game& game) const
     //if first card flipped
     //OR curr card background matches prev card background
     //OR curr card face matches prev card face
+    //OR is NOT BLOCKED
     if(prevCard == nullptr || prevCard->face[0] == currCard->face[0] ||
        prevCard->face[1].at(1) == currCard->face[1].at(1)){
         return true;

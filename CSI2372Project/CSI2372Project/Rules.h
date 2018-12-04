@@ -15,9 +15,12 @@ public:
     bool gameOver(const Game&);
     bool roundOver(const Game&);
     const Player& getNextPlayer(const Game&);
-    
+    std::string blockedCard = "";
+    bool isBlocked(const Game& game, Card * card);
+
 private:
     Player::Side currentPlayerSide = Player::top;
+    bool isHardMode;
 };
 
 #endif

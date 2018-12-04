@@ -27,5 +27,7 @@ CardDeck& CardDeck::make_CardDeck(){
         }
     }
     
+    //shuffle cards
+    
     return *newDeck;
 }

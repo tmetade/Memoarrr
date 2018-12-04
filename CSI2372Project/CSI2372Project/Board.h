@@ -22,6 +22,7 @@ public:
     void reset();
     Card* getCard( const Letter&, const Number& );
     void setCard( const Letter&, const Number&, Card* );
+    Card* blockedCard;
     
     friend std::ostream& operator<<(std::ostream& os, const Board&);
     
