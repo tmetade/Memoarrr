@@ -1,4 +1,4 @@
-//#define TEST_GAME_
+#define TEST_GAME_
 
 #include <iostream>
 #include <stdlib.h>
@@ -54,13 +54,12 @@ void Game::setCurrentCard(const Card* card)
 
 Card* Game::getCard(const Board::Letter& letter, const Board::Number& number)
 {
-    //which calls the corresponding method in Board
-    return nullptr;
+    return gameBoard->getCard(letter, number);
 }
 
 void Game::setCard(const Board::Letter& letter, const Board::Number& number, Card* card)
 {
-    //which calls the corresponding method in Board
+    gameBoard->setCard(letter, number, card);
 }
 
 std::ostream& operator<<(std::ostream& os, const Game &game)
@@ -93,12 +92,16 @@ std::ostream& operator<<(std::ostream& os, const Game &game)
         game->setCurrentCard(currentCard);
         Card gamePrevCard = *game->getPreviousCard();
         Card gameCurrentCard = *game->getCurrentCard();
-        //write bool to test this
+        
+        bool isCardPrevCorrect = ((Card::FaceAnimal)*prevCard == (Card::FaceAnimal)gamePrevCard && (Card::FaceBackground)*prevCard == (Card::FaceBackground)gamePrevCard);
+        bool isCardCurrentCorrect = ((Card::FaceAnimal)*currentCard == (Card::FaceAnimal)gameCurrentCard && (Card::FaceBackground)*currentCard == (Card::FaceBackground)gameCurrentCard);
+        
+        //didnt do get and set card
     
         game->nextRound();
         bool isRoundCorrect = (game->getRound() == 1 && game->getCurrentCard() == nullptr && game->getPreviousCard() == nullptr);
         
-        if(isPlayersCorrect && isRoundCorrect)
+        if(isPlayersCorrect && isCardPrevCorrect && isCardCurrentCorrect && isRoundCorrect)
             std::cout << "Game has passed its tests" << std::endl;
         else
             std::cerr << "Game didnt pass its tests" << std::endl;
