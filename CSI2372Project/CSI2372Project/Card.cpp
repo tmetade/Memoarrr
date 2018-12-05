@@ -1,3 +1,5 @@
+//#define TEST_CARD_
+
 #include "Card.h"
 
 Card::Card(FaceAnimal animal, FaceBackground colour)
@@ -59,3 +61,9 @@ Card::~Card()
 {
     
 }
+
+#if TEST_CARD_
+    
+#else
+
+#endif

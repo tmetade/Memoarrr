@@ -1,3 +1,5 @@
+//#define TEST_REWARD_DECK_
+
 #include "RewardDeck.h"
 #include <vector>
 
@@ -29,3 +31,11 @@ Reward* RewardDeck::getNext() {
 void RewardDeck::shuffle() {
     random_shuffle(rewards.begin(), rewards.end());
 }
+
+#if TEST_REWARD_TEST_
+
+std::cout<<"test"<<std::endl;
+
+#else
+
+#endif

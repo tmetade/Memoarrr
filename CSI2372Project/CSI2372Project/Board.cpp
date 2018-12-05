@@ -1,3 +1,5 @@
+//#define TEST_BOARD_
+
 #include "Board.h"
 #include <vector>
 
@@ -264,3 +266,9 @@ std::ostream& operator<<(std::ostream& os, const Board& board)
 
     return os;
 }
+
+#if TEST_BOARD_
+
+#else
+
+#endif

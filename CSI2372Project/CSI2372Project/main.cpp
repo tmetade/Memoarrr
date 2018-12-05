@@ -21,7 +21,7 @@ void printCards(Card* card1, Card* card2, Card* card3)
 }
 
 Board::Letter getLetterFromCoordinate(std::string cardCoord){
-    Board::Letter letterSelection;
+    Board::Letter letterSelection = (Board::Letter)10;
     
     switch(cardCoord.at(0))
     {
@@ -56,7 +56,7 @@ Board::Letter getLetterFromCoordinate(std::string cardCoord){
 }
 
 Board::Number getNumberFromCoordinate(std::string cardCoord){
-    Board::Number numberSelection;
+    Board::Number numberSelection = (Board::Number)10;
     
     switch(cardCoord.at(1))
     {

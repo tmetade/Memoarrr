@@ -1,3 +1,5 @@
+//#define TEST_CARD_DECK_
+
 #include "CardDeck.h"
 #include "Deck.h"
 #include <algorithm>
@@ -31,3 +33,9 @@ CardDeck& CardDeck::make_CardDeck(){
     
     return *newDeck;
 }
+
+#if TEST_CARD_DECK_
+
+#else
+
+#endif

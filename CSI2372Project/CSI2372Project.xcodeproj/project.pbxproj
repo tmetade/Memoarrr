@@ -13,7 +13,7 @@
 		0C20D63D217AB54600C2CB6B /* RewardDeck.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C20D63B217AB54600C2CB6B /* RewardDeck.cpp */; };
 		0C20D640217AB5AD00C2CB6B /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C20D63E217AB5AD00C2CB6B /* Game.cpp */; };
 		0C20D643217AB5E800C2CB6B /* Rules.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C20D641217AB5E800C2CB6B /* Rules.cpp */; };
-		0CCE9A8421777B3D00AD9320 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE9A8321777B3D00AD9320 /* main.cpp */; };
+		0C805A2621B798DA0071487B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0C805A2521B798DA0071487B /* main.cpp */; };
 		0CCE9A8C217781EA00AD9320 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE9A8A217781EA00AD9320 /* Player.cpp */; };
 		0CCE9A8F217781FA00AD9320 /* Card.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE9A8D217781FA00AD9320 /* Card.cpp */; };
 		0CCE9A922177820700AD9320 /* Board.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0CCE9A902177820700AD9320 /* Board.cpp */; };
@@ -44,8 +44,8 @@
 		0C20D63F217AB5AD00C2CB6B /* Game.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Game.h; sourceTree = "<group>"; };
 		0C20D641217AB5E800C2CB6B /* Rules.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Rules.cpp; sourceTree = "<group>"; };
 		0C20D642217AB5E800C2CB6B /* Rules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rules.h; sourceTree = "<group>"; };
+		0C805A2521B798DA0071487B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../../../Desktop/main.cpp; sourceTree = "<group>"; };
 		0CCE9A8021777B3C00AD9320 /* CSI2372Project */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CSI2372Project; sourceTree = BUILT_PRODUCTS_DIR; };
-		0CCE9A8321777B3D00AD9320 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		0CCE9A8A217781EA00AD9320 /* Player.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Player.cpp; sourceTree = "<group>"; };
 		0CCE9A8B217781EA00AD9320 /* Player.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		0CCE9A8D217781FA00AD9320 /* Card.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Card.cpp; sourceTree = "<group>"; };
@@ -84,7 +84,6 @@
 		0CCE9A8221777B3C00AD9320 /* CSI2372Project */ = {
 			isa = PBXGroup;
 			children = (
-				0CCE9A8321777B3D00AD9320 /* main.cpp */,
 				0CCE9A8A217781EA00AD9320 /* Player.cpp */,
 				0CCE9A8B217781EA00AD9320 /* Player.h */,
 				0CCE9A8D217781FA00AD9320 /* Card.cpp */,
@@ -100,6 +99,7 @@
 				0C20D63B217AB54600C2CB6B /* RewardDeck.cpp */,
 				0C20D63C217AB54600C2CB6B /* RewardDeck.h */,
 				0C20D63E217AB5AD00C2CB6B /* Game.cpp */,
+				0C805A2521B798DA0071487B /* main.cpp */,
 				0C20D63F217AB5AD00C2CB6B /* Game.h */,
 				0C20D641217AB5E800C2CB6B /* Rules.cpp */,
 				0C20D642217AB5E800C2CB6B /* Rules.h */,
@@ -172,8 +172,8 @@
 				0C20D633217A96F700C2CB6B /* Reward.cpp in Sources */,
 				0CCE9A922177820700AD9320 /* Board.cpp in Sources */,
 				0C20D643217AB5E800C2CB6B /* Rules.cpp in Sources */,
+				0C805A2621B798DA0071487B /* main.cpp in Sources */,
 				0C20D636217AB48300C2CB6B /* Deck.cpp in Sources */,
-				0CCE9A8421777B3D00AD9320 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

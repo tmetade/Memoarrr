@@ -1,3 +1,5 @@
+//#define TEST_DECK_
+
 #include "Deck.h"
 
 //Design a class Deck<C> as an abstract factory class that will be used to create a set of cards or a set of rewards. The type parameter <C> is intended to be one of {Card|Reward}.
@@ -14,5 +16,8 @@ C* Deck<C>::getNext()
     // returns the next card or reward by pointer. Will return nullptr if no more cards or rewards are available
 }
 
+#if TEST_DECK_
 
+#else
 
+#endif

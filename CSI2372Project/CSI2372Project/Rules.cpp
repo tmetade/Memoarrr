@@ -1,3 +1,5 @@
+//#define TEST_RULES_
+
 #include "Rules.h"
 
 //Design a class Rules which has the main purpose to check if a selection of a player is valid. 
@@ -87,3 +89,9 @@ const Player& Rules::getNextPlayer(const Game& game)
     
     return *currentPlayer;
 }
+
+#if TEST_RULES_
+
+#else
+
+#endif

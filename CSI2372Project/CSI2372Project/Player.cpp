@@ -1,3 +1,5 @@
+//#define TEST_PLAYER_
+
 #include "Player.h"
 #include "Rules.h"
 
@@ -40,3 +42,9 @@ std::ostream& operator<<(std::ostream& os, const Player &p)
         os << p.getName() << ": " << p.getNRubies() << " rubies";
     return os;
 }
+
+#if TEST_PLAYER_
+
+#else
+
+#endif
