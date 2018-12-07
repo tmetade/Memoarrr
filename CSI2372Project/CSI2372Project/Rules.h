@@ -18,8 +18,7 @@ public:
 private:
     Player::Side currentPlayerSide = Player::top;
     bool isHardMode;
-    std::string blockedCard = "";
-    bool isBlocked(const Game& game, Card * card);
+
 };
 
 #endif

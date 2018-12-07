@@ -9,20 +9,6 @@ Rules::Rules(int ruleType)
     isHardMode = ruleType == 3 || ruleType == 4;
 }
 
-bool Rules::isBlocked(const Game& game, Card * card){
-    const Card * currCard = game.getCurrentCard();
-    bool sameFace = currCard->face[1] == (*card)(1);
-    
-    if(isHardMode){
-        if(sameFace){
-            return true;
-        } else {
-            blockedCard = "";
-        }
-    }
-    return false;
-}
-
 bool Rules::isValid(const Game& game) const
 {
     const Card * prevCard = game.getPreviousCard();

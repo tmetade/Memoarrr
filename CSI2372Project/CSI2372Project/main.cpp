@@ -128,6 +128,8 @@ int main(int argc, const char * argv[])
     RewardDeck *rewardDeck = &RewardDeck::make_RewardDeck();
     rewardDeck->shuffle();
     
+    bool isExpertRules = (gameVersion == 3 || gameVersion || 4);
+    
     for (int i = 0; i<nPlayers; i++)
     {
         Player newPlayer(playerNames[i]);
@@ -197,6 +199,7 @@ int main(int argc, const char * argv[])
         while(!gameRules.roundOver(*game))
         {
             std::string cardCoord = "";
+            std::string blockedCard = "";
             
             //get next active player
             Player currentPlayer = gameRules.getNextPlayer(*game);
@@ -218,8 +221,12 @@ int main(int argc, const char * argv[])
                     letterSelection = getLetterFromCoordinate(cardCoord);
                     numberSelection = getNumberFromCoordinate(cardCoord);
                     
-                    if(gameRules.isBlocked(*game, gameBoard->getCard(letterSelection, numberSelection))){
-                        cout << "That card has been blocked by the previous player, please choose another card!";
+                    if(isExpertRules){
+                        if((*gameBoard->getCard(letterSelection, numberSelection))(1) == blockedCard){
+                            cout << "That card has been blocked by the previous player, please choose another card!";
+                        } else {
+                            blockedCard = "";
+                        }
                     } else {
                         yetToSelectCard = false;
                     }
@@ -228,6 +235,7 @@ int main(int argc, const char * argv[])
                 //might want to ask user to add a new coordinate
                 if(gameBoard->turnFaceUp(letterSelection, numberSelection))
                     game->setCurrentCard(gameBoard->getCard(letterSelection, numberSelection));
+                
                 
                 if(!gameRules.isValid(*game))
                 {
@@ -303,8 +311,7 @@ int main(int argc, const char * argv[])
                                     if(!gameBoard->isFaceUp(letter, number))
                                     {
                                         Card * selectedCard = gameBoard->getCard(letter, number);
-                                        std::string cardToBeBlocked = selectedCard->face[1];
-                                        gameRules.blockedCard = cardToBeBlocked;
+                                        blockedCard = selectedCard->face[1];
                                         
                                         yetToSelect = false;
                                     }
@@ -357,7 +364,7 @@ int main(int argc, const char * argv[])
         {
             if(game->getPlayer((Player::Side)i).isActive()){
                 game->getPlayer((Player::Side)i).addReward(*playerReward);
-                cout << "Player " << game->getPlayer((Player::Side)i).getName() << " has won the round and recieved " << *playerReward << " reward(s) !" << endl;
+                cout << "Player " << game->getPlayer((Player::Side)i).getName() << " has won the round and recieved " << *playerReward << " ruby!" << endl;
             }
         }
         game->nextRound();

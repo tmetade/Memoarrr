@@ -243,19 +243,17 @@ void Board::drawBoard()
 
 std::ostream& operator<<(std::ostream& os, const Board& board)
 {
-    if(board.boardDisplay[0] != ""){
-        if(board.gameVersion == 1){
-            for(int i = 0; i < 21; i++)
-            {
-                os << board.boardDisplay[i];
-                os << std::endl;
-            }
-        } else if (board.gameVersion == 2){
-            for(int i = 0; i < 5; i++)
-            {
-                os << board.boardDisplay[i];
-                os << std::endl;
-            }
+    if(board.gameVersion == 1){
+        for(int i = 0; i < 21; i++)
+        {
+            os << board.boardDisplay[i];
+            os << std::endl;
+        }
+    } else if (board.gameVersion == 2){
+        for(int i = 0; i < 5; i++)
+        {
+            os << board.boardDisplay[i];
+            os << std::endl;
         }
     }
 
