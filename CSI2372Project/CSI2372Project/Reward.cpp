@@ -17,8 +17,16 @@ std::ostream& operator<<(std::ostream& os, const Reward &r)
     return os;
 }
 
-#if TEST_REWARD_
-
-#else
-
+#ifdef TEST_REWARD_
+#include "RewardDeck.h"
+int main() {
+    RewardDeck *rewardDeck = &RewardDeck::make_RewardDeck();
+    Reward *reward = rewardDeck->getNext();
+    bool isReward = *reward == 4;
+    
+    if(isReward)
+        std::cout << "Reward has passed its tests" << std::endl;
+    else
+        std::cerr << "Reward didnt pass its tests" << std::endl;
+}
 #endif

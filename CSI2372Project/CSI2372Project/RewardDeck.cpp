@@ -34,10 +34,21 @@ void RewardDeck::shuffle() {
     random_shuffle(rewards.begin(), rewards.end());
 }
 
-#if TEST_REWARD_TEST_
-
-std::cout<<"test"<<std::endl;
-
-#else
-
+#ifdef TEST_REWARD_DECK_
+int main()
+{
+    RewardDeck *rewardDeck = &RewardDeck::make_RewardDeck();
+    Reward *reward = rewardDeck->getNext();
+    bool isReward = reward != nullptr;
+    
+    RewardDeck *rewardDeck2 = &RewardDeck::make_RewardDeck();
+    rewardDeck2->shuffle();
+    Reward *reward2 = rewardDeck2->getNext();
+    bool isShuffled = reward != reward2;
+    
+    if(isReward && isShuffled)
+        std::cout << "RewardDeck has passed its tests" << std::endl;
+    else
+        std::cerr << "RewardDeck didnt pass its tests" << std::endl;
+}
 #endif

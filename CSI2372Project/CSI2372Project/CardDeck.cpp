@@ -27,15 +27,25 @@ CardDeck& CardDeck::make_CardDeck(){
         for (int y = 0; y < NUM_OF_BACKGROUNDS; y++) {
             cards.push_back(Card(Card::getFaceAnimalAtIndex(x), Card::getFaceBackgroundAtIndex(y)));
         }
-    }
-    
-    //shuffle cards in main
-    
+    }    
     return *newDeck;
 }
 
-#if TEST_CARD_DECK_
-
-#else
-
+#ifdef TEST_CARD_DECK_
+int main()
+{
+    CardDeck *cardDeck = &CardDeck::make_CardDeck();
+    Card *card = cardDeck->getNext();
+    bool isCard = card !=nullptr;
+    
+    CardDeck *cardDeck2 = &CardDeck::make_CardDeck();
+    cardDeck2->shuffle();
+    Card *card2 = cardDeck2->getNext();
+    bool isShuffled = card != card2;
+    
+    if(isCard && isShuffled)
+        std::cout << "CardDeck has passed its tests" << std::endl;
+    else
+        std::cerr << "CardDeck didnt pass its tests" << std::endl;
+}
 #endif

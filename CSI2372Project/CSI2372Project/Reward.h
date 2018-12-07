@@ -17,7 +17,6 @@ public:
 private:
     int rewardValue;
     Reward(int rubyValue);
-    int getRewardValue(){return rewardValue;};
 };
 
 #endif

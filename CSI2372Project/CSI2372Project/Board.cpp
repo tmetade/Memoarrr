@@ -1,4 +1,4 @@
-#define TEST_BOARD_
+//#define TEST_BOARD_
 
 #include "Board.h"
 #include <vector>
@@ -14,6 +14,9 @@ struct NoMoreCards : public std::exception
 Board::Board(int gameVersion)
 : gameVersion(gameVersion)
 {
+    //remember to uncomment this when we submit
+    cardDeck.shuffle();
+    
     for(int i = 0; i < 5; i++)
     {
         for(int j = 0; j < 5; j++)
