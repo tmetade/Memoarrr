@@ -9,10 +9,6 @@ Rules::Rules(int ruleType)
     isHardMode = ruleType == 3 || ruleType == 4;
 }
 
-Rules::~Rules()
-{
-}
-
 bool Rules::isBlocked(const Game& game, Card * card){
     const Card * currCard = game.getCurrentCard();
     bool sameFace = currCard->face[1] == (*card)(1);

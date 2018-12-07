@@ -9,8 +9,6 @@
 class Card
 {
 public:
-    ~Card();
-    
     enum FaceAnimal {Crab, Penguin, Octopus, Turtle, Walrus};
     enum FaceBackground {Red, Green, Purple, Blue, Yellow};
     std::string face[3];

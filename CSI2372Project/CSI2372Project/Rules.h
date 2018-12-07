@@ -9,7 +9,6 @@ class Rules
 {
 public:
     Rules(int ruleType);
-    ~Rules();
     
     bool isValid(const Game&) const;
     bool gameOver(const Game&);

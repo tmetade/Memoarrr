@@ -6,10 +6,6 @@ Reward::Reward(int rubyValue)
 {
     rewardValue = rubyValue;
 }
-Reward::~Reward()
-{
-    
-}
 
 std::ostream& operator<<(std::ostream& os, const Reward &r)
 {

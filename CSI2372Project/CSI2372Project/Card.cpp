@@ -57,13 +57,6 @@ Card::FaceBackground Card::getFaceBackgroundAtIndex(int index)
     return static_cast<FaceBackground>(index);
 }
 
-Card::~Card()
-{
-    
-}
-
 #if TEST_CARD_
     //No Idea how ot test Card
-#else
-
 #endif

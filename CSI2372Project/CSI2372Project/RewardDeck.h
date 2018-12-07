@@ -18,7 +18,7 @@ public:
     RewardDeck(const RewardDeck&) = delete;
     void operator=(const RewardDeck& x) = delete;
     
-    void shuffle(); // says should be public in pdf but prof said protected in discussion
+    void shuffle();
     
 private:
     RewardDeck() : Deck(7){}

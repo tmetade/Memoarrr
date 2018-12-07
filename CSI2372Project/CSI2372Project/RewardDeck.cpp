@@ -18,8 +18,6 @@ RewardDeck& RewardDeck::make_RewardDeck()
     rewards.push_back(Reward(3));
     rewards.push_back(Reward(4));
     
-    //suffle cards in main
-    
     return *newRewardDeck;
 }
 

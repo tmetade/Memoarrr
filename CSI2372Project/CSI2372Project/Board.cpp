@@ -39,11 +39,6 @@ Board::Board(int gameVersion)
     
 }
 
-Board::~Board()
-{
-    
-}
-
 const bool Board::isFaceUp( const Letter& letter, const Number& number)
 {
     //TODO: Throws an exception of type OutOfRange if an invalid

@@ -10,7 +10,6 @@ class Board
 {
 public:
     Board( int gameVersion);
-    ~Board();
     
     enum Letter {A, B, C, D, E};
     enum Number {one = 1, two = 2, three = 3, four = 4, five = 5};

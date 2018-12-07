@@ -12,7 +12,6 @@ class Game
 {
 public:
     Game(Board *board);
-    ~Game();
     
     int getRound() const { return round; };
     void nextRound();

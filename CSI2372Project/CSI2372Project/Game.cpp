@@ -13,10 +13,6 @@ Game::Game(Board *board)
 {
 }
 
-Game::~Game()
-{
-}
-
 void Game::nextRound()
 {
     round++;
