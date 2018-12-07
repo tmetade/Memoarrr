@@ -1,4 +1,4 @@
-#define TEST_RULES_
+//#define TEST_RULES_
 
 #include "Rules.h"
 

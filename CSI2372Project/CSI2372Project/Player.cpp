@@ -1,6 +1,7 @@
 //#define TEST_PLAYER_
 
 #include "Player.h"
+#include "RewardDeck.h"
 #include "Rules.h"
 
 Player::Player(std::string name)
@@ -43,8 +44,30 @@ std::ostream& operator<<(std::ostream& os, const Player &p)
     return os;
 }
 
-#if TEST_PLAYER_
-
-#else
-
+#ifdef TEST_PLAYER_
+int main()
+{
+    std::string playerName = "player1";
+    Player player1(playerName);
+    RewardDeck *rewardDeck = &RewardDeck::make_RewardDeck();
+    
+    bool isPlayerName = playerName == player1.getName();
+    
+    player1.setActive(false);
+    bool isPlayerOut = !player1.isActive();
+    
+    //RewardDeck is not shuffled so we know the next card will be 4
+    Reward *reward = rewardDeck->getNext();
+    player1.addReward(*reward);
+    bool isReward = player1.getNRubies() == 4;
+    
+    Player::Side playerSide = Player::Side::top;
+    player1.setSide(playerSide);
+    bool isSide = player1.getSide() == playerSide;
+    
+    if(isPlayerName && isPlayerOut && isReward && isSide)
+        std::cout << "Player has passed its tests" << std::endl;
+    else
+        std::cerr << "Player didnt pass its tests" << std::endl;
+}
 #endif

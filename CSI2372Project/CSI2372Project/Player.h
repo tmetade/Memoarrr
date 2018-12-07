@@ -24,7 +24,6 @@ public:
     void setDisplayMode(bool endOfGame) { displayEndGame = endOfGame; };
     Side getSide() const { return playerSide; };
     void setSide(Side side){ playerSide = side; };
-    std::string getSideString() const;
     
     friend std::ostream& operator<<(std::ostream& os, const Player&);
     
@@ -35,6 +34,9 @@ private:
     int nRubies;
     std::string outputString;
     bool displayEndGame = false;
+    
+protected:
+    std::string getSideString() const;
 };
 
 #endif
