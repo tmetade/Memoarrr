@@ -100,8 +100,6 @@ void Board::reset()
 
 Card* Board::getCard( const Letter& letter, const Number& number )
 {
-    
-    // returns a pointer to the card at a given location. Throws an exception of type OutOfRange if an invalid Letter and Number combination was given
     return cardBoard[letter][number-1];
 }
 

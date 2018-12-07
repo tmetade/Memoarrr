@@ -1,4 +1,4 @@
-#define TEST_GAME_
+//#define TEST_GAME_
 
 #include <iostream>
 #include <stdlib.h>

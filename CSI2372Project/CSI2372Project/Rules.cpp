@@ -1,4 +1,4 @@
-//#define TEST_RULES_
+#define TEST_RULES_
 
 #include "Rules.h"
 
@@ -11,7 +11,6 @@ Rules::Rules(int ruleType)
 
 Rules::~Rules()
 {
-    
 }
 
 bool Rules::isBlocked(const Game& game, Card * card){
@@ -25,7 +24,6 @@ bool Rules::isBlocked(const Game& game, Card * card){
             blockedCard = "";
         }
     }
-    
     return false;
 }
 
@@ -42,13 +40,12 @@ bool Rules::isValid(const Game& game) const
        prevCard->face[1].at(1) == currCard->face[1].at(1)){
         return true;
     }
-    
     return false;
 }
 
 bool Rules::gameOver(const Game& game)
 {
-    return game.getRound() == 3;
+    return game.getRound() == 7;
 }
 
 bool Rules::roundOver(const Game& game)
@@ -65,7 +62,6 @@ bool Rules::roundOver(const Game& game)
             numOfActivePlayers++;
         }
     }
-    
     return numOfActivePlayers == 1;
 }
 
@@ -90,8 +86,46 @@ const Player& Rules::getNextPlayer(const Game& game)
     return *currentPlayer;
 }
 
-#if TEST_RULES_
-
-#else
-
+#ifdef TEST_RULES_
+int main()
+{
+    Rules gameRules(1);
+    Board *gameBoard = new Board(1);
+    Game *game = new Game(gameBoard);
+    CardDeck *cardDeck = &CardDeck::make_CardDeck();
+    
+    //CardDeck is not suffled so cards should have the same background
+    Card *card1 = cardDeck->getNext();
+    Card *card2 = cardDeck->getNext();
+    game->setCurrentCard(card1);
+    game->setCurrentCard(card2);
+    bool isValid = gameRules.isValid(*game);
+    
+    Player player1("Player1");
+    Player player2("Player2");
+    player1.setSide(Player::Side::top);
+    player2.setSide(Player::Side::bottom);
+    game->addPlayer(player1);
+    game->addPlayer(player2);
+    
+    game->getPlayer(Player::Side::top).setActive(false);
+    bool isRoundOver = gameRules.roundOver(*game);
+    
+    for (int i = 0; i < 7; i++)
+    {
+        game->nextRound();
+    }
+    
+    bool isGameOver = gameRules.gameOver(*game);
+    
+    Player nextPlayer = gameRules.getNextPlayer(*game);
+    bool nextPlayerMatch = (nextPlayer.getName() == player1.getName() && nextPlayer.getSide() == player1.getSide());
+    
+    // need to do it blocked
+    
+    if(isValid && nextPlayerMatch && isRoundOver && isGameOver)
+        std::cout << "Rules has passed its tests" << std::endl;
+    else
+        std::cerr << "Rules didnt pass its tests" << std::endl;
+}
 #endif
