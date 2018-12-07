@@ -1,4 +1,4 @@
-//#define TEST_BOARD_
+#define TEST_BOARD_
 
 #include "Board.h"
 #include <vector>
@@ -12,9 +12,8 @@ struct NoMoreCards : public std::exception
 };
 
 Board::Board(int gameVersion)
+: gameVersion(gameVersion)
 {
-    this->gameVersion = gameVersion;
-    
     for(int i = 0; i < 5; i++)
     {
         for(int j = 0; j < 5; j++)
@@ -105,13 +104,13 @@ Card* Board::getCard( const Letter& letter, const Number& number )
 
 void Board::setCard(const Letter& letter, const Number& number, Card* card)
 {
-    
+    cardBoard[letter][number-1] = card;
 }
 
 void Board::drawBoard()
 {
     //Generic Rules
-    if(this->gameVersion == 1){
+    if(gameVersion == 1){
         int boardRow = 0;
         std::string rowText;
         
@@ -265,8 +264,30 @@ std::ostream& operator<<(std::ostream& os, const Board& board)
     return os;
 }
 
-#if TEST_BOARD_
-
-#else
-
+#ifdef TEST_BOARD_
+int main()
+{
+    Board *gameBoard = new Board(1);
+    CardDeck *cardDeck = &CardDeck::make_CardDeck();
+    
+    gameBoard->turnFaceUp(Board::Letter::A, Board::Number::one);
+    bool isCardFaceUp = gameBoard->isFaceUp(Board::Letter::A, Board::Number::one);
+    
+    gameBoard->turnFaceDown(Board::Letter::A, Board::Number::one);
+    bool isCardFaceDown = !gameBoard->isFaceUp(Board::Letter::A, Board::Number::one);
+    
+    //flip card over then reset to see if the card has been flipped over
+    gameBoard->turnFaceUp(Board::Letter::A, Board::Number::one);
+    gameBoard->reset();
+    bool isBoardReset = !gameBoard->isFaceUp(Board::Letter::A, Board::Number::one);
+    
+    Card *card = cardDeck->getNext();
+    gameBoard->setCard(Board::Letter::A, Board::Number::one, card);
+    bool isCard = gameBoard->getCard(Board::Letter::A, Board::Number::one) == card;
+    
+    if(isCardFaceUp && isCardFaceDown && isBoardReset && isCard)
+        std::cout << "Board has passed its tests" << std::endl;
+    else
+        std::cerr << "Board didnt pass its tests" << std::endl;
+}
 #endif

@@ -63,7 +63,7 @@ Card::~Card()
 }
 
 #if TEST_CARD_
-    
+    //No Idea how ot test Card
 #else
 
 #endif
