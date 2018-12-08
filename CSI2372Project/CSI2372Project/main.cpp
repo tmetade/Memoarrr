@@ -147,6 +147,8 @@ int main(int argc, const char * argv[])
     {
         cout << "Round Starting!" << endl;
         
+        int turn = 0;
+        
         //reset the game for a new round
         gameBoard->reset();
         
@@ -204,6 +206,8 @@ int main(int argc, const char * argv[])
             std::string cardCoord = "";
             std::string blockedCard = "";
             
+            turn++;
+            
             //get next active player
             Player currentPlayer = gameRules.getNextPlayer(*game);
             
@@ -229,6 +233,7 @@ int main(int argc, const char * argv[])
                             cout << "That card has been blocked by the previous player, please choose another card!";
                         } else {
                             blockedCard = "";
+                            yetToSelectCard = false;
                         }
                     } else {
                         yetToSelectCard = false;
@@ -245,7 +250,7 @@ int main(int argc, const char * argv[])
                     cout << currentPlayer.getName() << " has guessed incorrectly! They're now inactive." << endl;
                     game->getPlayer(currentPlayer.getSide()).setActive(false);
                 }
-                else
+                else if(turn != 1)
                 {
                     
                     //if game version == 3 && the card revealed is matching -> activate card's ability
@@ -283,10 +288,15 @@ int main(int argc, const char * argv[])
                                     Card * chosenCard = gameBoard->getCard(letter, number);
                                     Card * currentCard = gameBoard->getCard(letterSelection, numberSelection);
                                     
-                                    
+                                    bool isChosenCardFaceUp = gameBoard->isFaceUp(letter, number);
+             
                                     game->setCard(letter, number, currentCard);
                                     game->setCard(letterSelection, numberSelection, chosenCard);
 
+                                    if(!isChosenCardFaceUp){
+                                        gameBoard->turnFaceDown(letterSelection, numberSelection);
+                                    }
+                                    
                                     yetToSelect = false;
                                 }
                                 
@@ -385,7 +395,7 @@ int main(int argc, const char * argv[])
         {
             if(game->getPlayer((Player::Side)i).isActive()){
                 game->getPlayer((Player::Side)i).addReward(*playerReward);
-                cout << "Player " << game->getPlayer((Player::Side)i).getName() << " has won the round and recieved " << *playerReward << " ruby!" << endl;
+                cout << "Player " << game->getPlayer((Player::Side)i).getName() << " has won the round and recieved " << *playerReward << endl;
             }
         }
         game->nextRound();

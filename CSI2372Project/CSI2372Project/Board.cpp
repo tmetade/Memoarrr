@@ -34,8 +34,7 @@ Board::Board(int gameVersion)
         }
     }
     
-    if (gameVersion == 1)
-        drawBoard();
+    drawBoard();
     
 }
 
@@ -108,7 +107,7 @@ void Board::setCard(const Letter& letter, const Number& number, Card* card)
 void Board::drawBoard()
 {
     //Generic Rules
-    if(gameVersion == 1){
+    if(gameVersion == 1 || gameVersion == 3){
         int boardRow = 0;
         std::string rowText;
         
@@ -200,7 +199,7 @@ void Board::drawBoard()
         
         boardDisplay[boardRow] = rowText;
         
-    } else if (gameVersion == 2){ //Expert Display Mode
+    } else if (gameVersion == 2 || gameVersion == 4){ //Expert Display Mode
         std::string cardsRevealed = "";
         std::vector<Card*> cardsFacingUp;
         std::string letters [5] = {"A", "B", "C", "D", "E"};
@@ -243,13 +242,13 @@ void Board::drawBoard()
 
 std::ostream& operator<<(std::ostream& os, const Board& board)
 {
-    if(board.gameVersion == 1){
+    if(board.gameVersion == 1 || board.gameVersion == 3){
         for(int i = 0; i < 21; i++)
         {
             os << board.boardDisplay[i];
             os << std::endl;
         }
-    } else if (board.gameVersion == 2){
+    } else if (board.gameVersion == 2 || board.gameVersion == 4){
         for(int i = 0; i < 5; i++)
         {
             os << board.boardDisplay[i];
