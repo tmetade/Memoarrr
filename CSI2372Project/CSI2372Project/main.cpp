@@ -268,7 +268,25 @@ int main(int argc, const char * argv[])
                             case 'O':
                                 //user can enter another coordinate, that card switches positions the original card
                                 cout << *game;
+                                
+                                while(yetToSelect)
+                                {
+                                    cout << "Enter in a location for which you'd like to swap your current card with:  ";
+                                    cin >> cardCoord;
+                                    
+                                    letter = getLetterFromCoordinate(cardCoord);
+                                    number = getNumberFromCoordinate(cardCoord);
+                                    
+                                    Card * chosenCard = gameBoard->getCard(letter, number);
+                                    Card * currentCard = gameBoard->getCard(letterSelection, numberSelection);
+                                    
+                                    
+                                    game->setCard(letter, number, currentCard);
+                                    game->setCard(letterSelection, numberSelection, chosenCard);
 
+                                    yetToSelect = false;
+                                }
+                                
                                 break;
                                 
                             case 'P':
