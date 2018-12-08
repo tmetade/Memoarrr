@@ -10,11 +10,6 @@ Player::Player(std::string name)
     active = true;
 }
 
-Player::~Player()
-{
-    
-}
-
 void Player::addReward(const Reward& reward)
 {
     nRubies += reward;

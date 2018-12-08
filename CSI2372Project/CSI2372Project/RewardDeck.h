@@ -14,15 +14,12 @@ class RewardDeck : public Deck<Reward>
 public:
     static RewardDeck& make_RewardDeck();
     Reward* getNext();
+    void shuffle();
     
     RewardDeck(const RewardDeck&) = delete;
     void operator=(const RewardDeck& x) = delete;
     
-    void shuffle();
-    
 private:
     RewardDeck() : Deck(7){}
-    
 };
-
 #endif

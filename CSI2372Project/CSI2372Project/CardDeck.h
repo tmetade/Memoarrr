@@ -22,5 +22,4 @@ private:
     CardDeck() : Deck(NUM_OF_ANIMALS*NUM_OF_BACKGROUNDS){}
     static std::vector<Card> cards;
 };
-
 #endif

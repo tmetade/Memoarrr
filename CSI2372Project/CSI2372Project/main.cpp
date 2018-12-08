@@ -228,14 +228,20 @@ int main(int argc, const char * argv[])
                     letterSelection = getLetterFromCoordinate(cardCoord);
                     numberSelection = getNumberFromCoordinate(cardCoord);
                     
-                    if(isExpertRules){
-                        if((*gameBoard->getCard(letterSelection, numberSelection))(1) == blockedCard){
+                    if(isExpertRules)
+                    {
+                        if((*gameBoard->getCard(letterSelection, numberSelection))(1) == blockedCard)
+                        {
                             cout << "That card has been blocked by the previous player, please choose another card!";
-                        } else {
+                        }
+                        else
+                        {
                             blockedCard = "";
                             yetToSelectCard = false;
                         }
-                    } else {
+                    }
+                    else
+                    {
                         yetToSelectCard = false;
                     }
                 }
@@ -252,27 +258,15 @@ int main(int argc, const char * argv[])
                 }
                 else if(turn != 1)
                 {
-                    
-                    //if game version == 3 && the card revealed is matching -> activate card's ability
-                        //if card animal == octopus
-                            //user can enter an adjacent coordinate, that card switches positions the original card
-                        //if card animal == penguin
-                            //can turn a face up card facing downwards
-                            //if the first card revealed, ignore!
-                        //if card animal == walrus
-                            //is able to choose a block a certain location for the next player
-                        //if card == crab
-                            //must turn over another card, if that card does not match the previous card, the player is out!
-                        //if card == turle
-                            //the next player's turn is skipped without penalty!
-                    
-                    if(gameVersion == 3 || gameVersion == 4){
+                    if(gameVersion == 3 || gameVersion == 4)
+                    {
                         Card * currentCard = gameBoard->getCard(letterSelection, numberSelection);
                         bool yetToSelect = true;
                         Board::Letter letter;
                         Board::Number number;
                         
-                        switch((*currentCard)(1).at(1)){
+                        switch((*currentCard)(1).at(1))
+                        {
                             case 'O':
                                 //user can enter another coordinate, that card switches positions the original card
                                 cout << *game;
@@ -393,9 +387,10 @@ int main(int argc, const char * argv[])
         Reward *playerReward = rewardDeck->getNext();
         for(int i = 0; i<nPlayers; i++)
         {
-            if(game->getPlayer((Player::Side)i).isActive()){
+            if(game->getPlayer((Player::Side)i).isActive())
+            {
                 game->getPlayer((Player::Side)i).addReward(*playerReward);
-                cout << "Player " << game->getPlayer((Player::Side)i).getName() << " has won the round and recieved " << *playerReward << endl;
+                cout << game->getPlayer((Player::Side)i).getName() << " has won the round and recieved " << *playerReward << endl;
             }
         }
         game->nextRound();

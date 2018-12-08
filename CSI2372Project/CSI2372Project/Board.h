@@ -34,5 +34,4 @@ private:
     int gameVersion;
     Card* blockedCard;
 };
-
 #endif

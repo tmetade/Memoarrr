@@ -1,5 +1,3 @@
-//#define TEST_CARD_
-
 #include "Card.h"
 
 Card::Card(FaceAnimal animal, FaceBackground colour)
@@ -56,7 +54,3 @@ Card::FaceBackground Card::getFaceBackgroundAtIndex(int index)
 {
     return static_cast<FaceBackground>(index);
 }
-
-#if TEST_CARD_
-    //No Idea how ot test Card
-#endif

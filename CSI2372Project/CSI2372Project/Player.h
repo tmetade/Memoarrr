@@ -5,13 +5,10 @@
 #include <iostream>
 #include "Reward.h"
 
-
 class Player
 {
-    
 public:
     Player(std::string playerName);
-    ~Player();
     
     enum Side {top, bottom, left, right};
     std::string sideString[4] = {"top", "bottom", "left", "right"};
@@ -38,5 +35,4 @@ private:
 protected:
     std::string getSideString() const;
 };
-
 #endif

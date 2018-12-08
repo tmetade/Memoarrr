@@ -20,26 +20,28 @@ Board::Board(int gameVersion)
     {
         for(int j = 0; j < 5; j++)
         {
-            if(!cardDeck.isEmpty()){
-                if(i == 2 && j == 2){
+            if(!cardDeck.isEmpty())
+            {
+                if(i == 2 && j == 2)
+                {
                     cardBoard[i][j] = nullptr;
                     cardFaceDown[i][j] = NULL;
-                } else {
+                }
+                else
+                {
                     cardBoard[i][j] = cardDeck.getNext();
                     cardFaceDown[i][j] = true;
                 }
-            } else
+            }
+            else
                 throw NoMoreCards();
         }
     }
-    
     drawBoard();
-    
 }
 
 const bool Board::isFaceUp( const Letter& letter, const Number& number)
 {
-    //TODO: Throws an exception of type OutOfRange if an invalid
     int row = letter;
     int col = number - 1;
     
@@ -48,8 +50,6 @@ const bool Board::isFaceUp( const Letter& letter, const Number& number)
 
 bool Board::turnFaceUp( const Letter& letter, const Number& number )
 {
-    //TODO: Throws an exception of type OutOfRange if an invalid Letter and Number
-    
     int row = letter;
     int col = number - 1;
     
@@ -65,14 +65,13 @@ bool Board::turnFaceUp( const Letter& letter, const Number& number )
 
 bool Board::turnFaceDown( const Letter& letter, const Number& number )
 {
-    //TODO Throws an exception of type OutOfRange if an invalid Letter and
-
     int row = letter;
     int col = number - 1;
     
-    if(cardFaceDown[row][col]){
+    if(cardFaceDown[row][col])
         return false;
-    } else {
+    else
+    {
         cardFaceDown[row][col] = true;
         drawBoard();
         return true;
@@ -81,11 +80,16 @@ bool Board::turnFaceDown( const Letter& letter, const Number& number )
 
 void Board::reset()
 {
-    for(int i = 0; i < 5; i++){
-        for(int j = 0; j < 5; j++){
-            if(i == 2 && j == 2){
+    for(int i = 0; i < 5; i++)
+    {
+        for(int j = 0; j < 5; j++)
+        {
+            if(i == 2 && j == 2)
+            {
                 cardFaceDown[i][j] = NULL;
-            } else {
+            }
+            else
+            {
                 cardFaceDown[i][j] = true;
             }
         }
@@ -106,7 +110,8 @@ void Board::setCard(const Letter& letter, const Number& number, Card* card)
 void Board::drawBoard()
 {
     //Generic Rules
-    if(gameVersion == 1 || gameVersion == 3){
+    if(gameVersion == 1 || gameVersion == 3)
+    {
         int boardRow = 0;
         std::string rowText;
         
@@ -174,7 +179,8 @@ void Board::drawBoard()
         
         for(int bottomNavigation = 0; bottomNavigation < 21; bottomNavigation++)
         {
-            switch (bottomNavigation) {
+            switch (bottomNavigation)
+            {
                 case 3:
                     rowText += "1";
                     break;
@@ -195,26 +201,29 @@ void Board::drawBoard()
                     break;
             }
         }
-        
         boardDisplay[boardRow] = rowText;
-        
-    } else if (gameVersion == 2 || gameVersion == 4){ //Expert Display Mode
+    }
+    else if (gameVersion == 2 || gameVersion == 4)
+    { //Expert Display Mode
         std::string cardsRevealed = "";
         std::vector<Card*> cardsFacingUp;
         std::string letters [5] = {"A", "B", "C", "D", "E"};
         std::string numbers [5] = {"1", "2", "3", "4", "5"};
         
-        for(int row = 0; row < 5; row++){
-            for(int col = 0; col < 5; col++){
-                if(!cardFaceDown[row][col] && !(row == 2 && col == 2)){
-                    
+        for(int row = 0; row < 5; row++)
+        {
+            for(int col = 0; col < 5; col++)
+            {
+                if(!cardFaceDown[row][col] && !(row == 2 && col == 2))
+                {
                     cardsFacingUp.push_back(cardBoard[row][col]);
                     cardsRevealed += (letters[row] + numbers[col] + "  ");
                 }
             }
         }
         
-        if(cardsFacingUp.size() > 0){
+        if(cardsFacingUp.size() > 0)
+        {
             std::string rowText;
             
             for(int currentRow = 0; currentRow < 3; currentRow++){
@@ -232,11 +241,9 @@ void Board::drawBoard()
             {
                 rowText += " ";
             }
-            
             boardDisplay[4] = cardsRevealed;
         }
     }
-    
 }
 
 std::ostream& operator<<(std::ostream& os, const Board& board)
@@ -270,7 +277,7 @@ int main()
     gameBoard->turnFaceDown(Board::Letter::A, Board::Number::one);
     bool isCardFaceDown = !gameBoard->isFaceUp(Board::Letter::A, Board::Number::one);
     
-    //flip card over then reset to see if the card has been flipped over
+    //flip card over, then reset to see if the card has been flipped over
     gameBoard->turnFaceUp(Board::Letter::A, Board::Number::one);
     gameBoard->reset();
     bool isBoardReset = !gameBoard->isFaceUp(Board::Letter::A, Board::Number::one);

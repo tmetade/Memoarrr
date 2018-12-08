@@ -36,5 +36,4 @@ private:
     Board *gameBoard;
     std::vector<Player> gamePlayers;
 };
-
 #endif

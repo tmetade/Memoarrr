@@ -41,7 +41,8 @@ Player& Game::getPlayer (Player::Side side) const
 
 void Game::setCurrentCard(const Card* card)
 {
-    if(currentCard != nullptr){
+    if(currentCard != nullptr)
+    {
         previousCard = currentCard;
     }
     
@@ -91,8 +92,6 @@ std::ostream& operator<<(std::ostream& os, const Game &game)
         
         bool isCardPrevCorrect = ((Card::FaceAnimal)*prevCard == (Card::FaceAnimal)gamePrevCard && (Card::FaceBackground)*prevCard == (Card::FaceBackground)gamePrevCard);
         bool isCardCurrentCorrect = ((Card::FaceAnimal)*currentCard == (Card::FaceAnimal)gameCurrentCard && (Card::FaceBackground)*currentCard == (Card::FaceBackground)gameCurrentCard);
-        
-        //didnt do get and set card
     
         game->nextRound();
         bool isRoundCorrect = (game->getRound() == 1 && game->getCurrentCard() == nullptr && game->getPreviousCard() == nullptr);

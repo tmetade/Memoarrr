@@ -21,14 +21,16 @@ RewardDeck& RewardDeck::make_RewardDeck()
     return *newRewardDeck;
 }
 
-Reward* RewardDeck::getNext() {
+Reward* RewardDeck::getNext()
+{
     if (!isEmpty())
         return &(rewards[numCards-- - 1]);
     else
         return nullptr;
 }
 
-void RewardDeck::shuffle() {
+void RewardDeck::shuffle()
+{
     random_shuffle(rewards.begin(), rewards.end());
 }
 

@@ -2,8 +2,6 @@
 
 #include "Rules.h"
 
-//Design a class Rules which has the main purpose to check if a selection of a player is valid. 
-
 Rules::Rules(int ruleType)
 {
     isHardMode = ruleType == 3 || ruleType == 4;
@@ -102,8 +100,6 @@ int main()
     
     Player nextPlayer = gameRules.getNextPlayer(*game);
     bool nextPlayerMatch = (nextPlayer.getName() == player1.getName() && nextPlayer.getSide() == player1.getSide());
-    
-    // need to do it blocked
     
     if(isValid && nextPlayerMatch && isRoundOver && isGameOver)
         std::cout << "Rules has passed its tests" << std::endl;
