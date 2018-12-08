@@ -131,7 +131,7 @@ int main(int argc, const char * argv[])
     RewardDeck *rewardDeck = &RewardDeck::make_RewardDeck();
     rewardDeck->shuffle();
     
-    bool isExpertRules = (gameVersion == 3 || gameVersion || 4);
+    bool isExpertRules = (gameVersion == 3 || gameVersion == 4);
     
     for (int i = 0; i<nPlayers; i++)
     {
