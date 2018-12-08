@@ -99,22 +99,25 @@ int main(int argc, const char * argv[])
     cout << "Welcome to Memoarrr!" << endl;
     
     //Get input from user to initialize the game
-    while(gameVersion<1 || gameVersion > 3)
+    while(gameVersion<1 || gameVersion > 4)
     {
         cout << "Select your game version: " << std::endl;
-        cout << "1-Base Game 2-Expert Display Mode 3-Expert Rules Mode ";
+        cout << "1 - Base Game" << endl;
+        cout << "2 - Expert Display " << endl;
+        cout << "3 - Expert Rules " << endl;
+        cout << "4 - Extreme Expert (Expert Display & Rules) " << endl;
         cin >> gameVersion;
     }
     
     while(nPlayers<2 || nPlayers>4)
     {
-        cout << "Enter the number of players (2-4): ";
+        cout << "Enter the number of players (2-4): " << endl;
         cin >> nPlayers;
     }
     
     string playerNames[nPlayers];
     string tempPlayerName;
-    cout << "Enter the name of the players: ";
+    cout << "Enter the name of the players: " << endl;;
     for(int i=0; i<nPlayers; i++)
     {
         std::cin >> tempPlayerName;
@@ -142,7 +145,7 @@ int main(int argc, const char * argv[])
     
     while(!gameRules.gameOver(*game))
     {
-        cout << "Round Starting!" <<endl;
+        cout << "Round Starting!" << endl;
         
         //reset the game for a new round
         gameBoard->reset();
@@ -215,7 +218,7 @@ int main(int argc, const char * argv[])
                 
                 while(yetToSelectCard)
                 {
-                    cout << "Enter in a card coordinate you would like to reveal: (eg. A2)";
+                    cout << "Enter in a card coordinate you would like to reveal: (eg. A2)   " << endl;
                     cin >> cardCoord;
                     
                     letterSelection = getLetterFromCoordinate(cardCoord);
