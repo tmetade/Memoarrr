@@ -18,7 +18,6 @@ public:
 private:
     Player::Side currentPlayerSide = Player::top;
     bool isHardMode;
-
 };
 
 #endif
